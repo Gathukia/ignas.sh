@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useMemo } from "react";
+import Image from 'next/image';
 import { Tags, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from 'next/link';
@@ -66,10 +67,12 @@ const PostCard = ({ post, index }) => {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "tween", ease: "easeOut", duration: 0.3 }}
             >
-              <img
+              <Image
                 src={post.heroImage}
                 alt={post.title}
-                className="w-full h-full object-cover"
+                layout="fill"
+                objectFit="cover"
+                className="w-full h-full"
               />
             </motion.div>
           </div>

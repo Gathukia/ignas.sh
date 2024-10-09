@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Play } from "react-icons/play";
 import { MediaPlayer } from "@vidstack/react";
+import Image from 'next/image'; // Import Next.js Image component
 import '@vidstack/player/styles.css'; // Import default Vidstack styles
 
 const VideoPlayer = ({ src, title, thumbnail }) => {
@@ -20,9 +21,11 @@ const VideoPlayer = ({ src, title, thumbnail }) => {
       {/* Display Thumbnail if Video Not Playing */}
       {!isPlaying ? (
         <div className="relative">
-          <img
+          <Image
             src={thumbnail || `https://api.dicebear.com/6.x/shapes/svg?seed=${src}`}
             alt={title || "Video thumbnail"}
+            width={640} // Provide width and height for Next.js Image optimization
+            height={360}
             className="w-full h-48 md:h-64 lg:h-72 object-cover"
           />
           <button
@@ -48,7 +51,7 @@ const VideoPlayer = ({ src, title, thumbnail }) => {
           >
             {/* Fallback content in case the video does not load */}
             <div slot="fallback">
-              Sorry, your browser doesn't support embedded videos.
+              Sorry, your browser doesn&apos;t support embedded videos.
             </div>
           </MediaPlayer>
         </div>

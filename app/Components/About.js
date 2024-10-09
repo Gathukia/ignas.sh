@@ -12,7 +12,7 @@ const About = () => {
     <div className="bg-transparent pt-6">
       <h2 className="text-base font-bold mb-2 text-primary">About Me</h2>
       <p className="text-sm leading-relaxed text-muted-foreground mb-4 group">
-        Hey, I'm <EmphasizedText>Edwin Ignas</EmphasizedText>, a <EmphasizedText>Software Engineer</EmphasizedText> based in <EmphasizedText>Nairobi, Kenya</EmphasizedText>. 
+        Hey, I&apos;m <EmphasizedText>Edwin Ignas</EmphasizedText>, a <EmphasizedText>Software Engineer</EmphasizedText> based in <EmphasizedText>Nairobi, Kenya</EmphasizedText>. 
         I specialize in <EmphasizedText>systems software design</EmphasizedText> and <EmphasizedText>software infrastructure development</EmphasizedText>, focusing on building 
         high-performance, efficient, and fast systems.
       </p>

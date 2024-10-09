@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SpotifyVisualizer from './Visualizer';
 import { useTheme } from 'next-themes';
+import Image from 'next/image'; // Import the Next.js Image component
 
 const SpotifyPlayer = () => {
   const [currentTrack, setCurrentTrack] = useState(null);

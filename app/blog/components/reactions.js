@@ -27,7 +27,7 @@ export const useReactions = (slug, initialLikes = 0) => {
       origin: { y: 0.6 },
     })
 
-    localStorage.setItem(slug, JSON.stringify({ liked: true }))
+    localStorage.setItem(JSON.stringify({ liked: true }))
     setSubmitting(false)
   }, [submitting, liked])
 

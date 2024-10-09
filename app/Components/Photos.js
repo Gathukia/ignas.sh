@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import Image from 'next/image';
 
 const photos = [
   "/images/photo1.png",
@@ -66,11 +67,13 @@ const PhotosComponent = () => {
   return (
     <div className="relative w-full h-full flex flex-col md:flex-row border border-border">
       <div className="relative w-full md:w-3/4 h-full flex items-center justify-center overflow-hidden pb-4">
-        <img
+        <Image
           key={selectedPhoto}
           src={selectedPhoto}
           alt="Selected Photo"
-          className={`absolute w-full h-full object-cover rounded-3xl shadow-lg transition-transform duration-300 ease-in-out ${
+          layout="fill"
+          objectFit="cover"
+          className={`absolute rounded-3xl shadow-lg transition-transform duration-300 ease-in-out ${
             direction > 0 ? 'animate-slide-left' : 'animate-slide-right'
           }`}
         />
@@ -105,16 +108,20 @@ const Thumbnail = React.memo(({ photo, index, isSelected, onSelect }) => {
         isSelected ? "border-4 border-indigo-500 scale-120" : "scale-100"
       }`}
     >
-      <img
+      <Image
         src={photo}
         alt={`Thumbnail ${index + 1}`}
+        width={60}
+        height={60}
         className="object-cover rounded-xl shadow-lg transition-all"
-        style={{ width: '60px', height: '60px' }}
         loading="lazy"
       />
     </div>
   );
 });
+
+// Adding displayName to resolve the display-name warning
+Thumbnail.displayName = "Thumbnail";
 
 function debounce(func, wait) {
   let timeout;
