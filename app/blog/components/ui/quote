@@ -1,0 +1,15 @@
+import { Quote } from "react-icons/fa"; // Assuming you use react-icons or similar for the quote icon
+
+const QuoteBox = ({ quote, author }) => (
+  <div className="bg-yellow-50 dark:bg-yellow-800 p-6 rounded-lg shadow-md mb-6">
+    <div className="flex items-start space-x-2 mb-4">
+      <Quote className="w-6 h-6 text-yellow-500" />
+      <blockquote className="text-xl text-gray-800 dark:text-gray-100 italic font-serif">
+        "{quote}"
+      </blockquote>
+    </div>
+    <p className="text-right text-gray-600 dark:text-gray-300 font-medium">- {author}</p>
+  </div>
+);
+
+export default QuoteBox;

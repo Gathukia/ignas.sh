@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light theme (unchanged) */
+@layer base {
+  :root {
+    --background: 60 25% 89%;
+    --foreground: 35 85% 15%;
+    --card: 60 30% 97%;
+    --card-foreground: 35 85% 15%;
+    --popover: 60 30% 98%;
+    --popover-foreground: 35 85% 15%;
+    --primary: 35 85% 45%;
+    --primary-foreground: 60 30% 98%;
+    --secondary: 40 30% 92%;
+    --secondary-foreground: 35 85% 15%;
+    --muted: 40 30% 92%;
+    --muted-foreground: 35 60% 35%;
+    --accent: 30 70% 50%;
+    --accent-foreground: 60 30% 98%;
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 60 30% 98%;
+    --border: 40 30% 82%;
+    --input: 40 30% 82%;
+    --ring: 35 85% 45%;
+    --radius: 0.5rem;
+  }
+}
+
+/* Dark theme (modified to use shades of black) */
+@layer base {
+  .dark {
+    --background: 0 0% 7%; /* Very dark, almost black background */
+    --foreground: 0 0% 90%; /* Light gray for body text */
+    --card: 0 0% 10%; /* Slightly lighter black for cards */
+    --card-foreground: 0 0% 90%; /* Light gray for card text */
+    --popover: 102 5% 34%; /* Dark gray for popover */
+    --popover-foreground: 32 90% 49%; /* Light gray for popover text */
+    --primary: 0 0% 80%; /* Light gray for headers/links */
+    --primary-foreground: 0 0% 5%; /* Very dark gray for primary elements */
+    --secondary: 0 0% 15%; /* Dark gray for secondary elements */
+    --secondary-foreground: 0 0% 80%; /* Light gray for secondary text */
+    --muted: 120 5% 3%; /* Dark gray for muted elements */
+    --muted-foreground: 0 0% 60%; /* Dimmed gray for muted text */
+    --accent: 0 0% 25%; /* Dark gray for accents */
+    --accent-foreground: 0 0% 90%; /* Light gray for accent elements */
+    --destructive: 0 70% 50%; /* Keeping red for destructive actions */
+    --destructive-foreground: 0 0% 90%; /* Light gray for destructive text */
+    --border: 0 0% 15%; /* Darker border color */
+    --input: 0 0% 12%; /* Dark input background */
+    --ring: 0 0% 80%; /* Light gray ring */
+    --radius: 0.5rem; /* Rounded corners for consistency */
+  }
+}
+
+/* Applying the styles */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-space-mono;
+    color: hsl(var(--primary)); /* Set headings to light gray for dark mode */
+  }
+  p, .body-text {
+    @apply font-inter;
+  }
+  a {
+    color: hsl(var(--primary)); /* Links styled with light gray */
+  }
+  code, pre {
+    @apply font-space-mono;
+    background-color: hsl(var(--card)); /* Code blocks with card background */
+    color: hsl(var(--card-foreground)); /* Light text for code */
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius);
+  }
+  .caption, .subtitle {
+    font-family: 'Iosevka Aile Iaso', monospace;
+  }
+}

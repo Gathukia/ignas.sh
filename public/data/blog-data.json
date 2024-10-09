@@ -1,0 +1,89 @@
+{
+  "posts": [
+    {
+      "id": "5a615dcc-4c8e-49a5-a839-c6cdfded5703",
+      "slug": "small",
+      "title": "what then?",
+      "description": "Is this thing working?",
+      "tags": [
+        "abstract"
+      ],
+      "publishDate": "1970-01-01T00:00:00.000Z",
+      "readingTime": "1 min read",
+      "uploaded": "1970-01-01T00:00:00.000Z",
+      "tag": "abstract",
+      "heroImage": "/posts/post4.jpg"
+    },
+    {
+      "id": "ffe12239-7a7e-48d1-8452-4e4ad5241265",
+      "slug": "hello",
+      "title": "React Hooks Deep Dive Transforming Functional Components",
+      "description": "Explore how React hooks have transformed the way we write functional components in modern React applications.",
+      "tags": [
+        "tech"
+      ],
+      "publishDate": "2024-09-18T00:00:00.000Z",
+      "readingTime": "4 min read",
+      "uploaded": "2024-09-18T00:00:00.000Z",
+      "tag": "tech",
+      "heroImage": "/posts/post3.jpg"
+    },
+    {
+      "id": "e5d88388-f697-498c-82d7-55b6902db4ee",
+      "slug": "ai",
+      "title": "TypeScript Best Practices Writing Cleaner, Safer Code",
+      "description": "Learn key best practices for writing clean and type-safe TypeScript code.",
+      "tags": [
+        "web-development"
+      ],
+      "publishDate": "2024-11-20T00:00:00.000Z",
+      "readingTime": "6 min read",
+      "uploaded": "2024-11-20T00:00:00.000Z",
+      "tag": "web-development",
+      "heroImage": "/posts/post1.jpg"
+    },
+    {
+      "id": "02ae98e2-6d72-49e9-8ff8-68c64494195b",
+      "slug": "birthday",
+      "title": "Next.js 13 App Router A New Era of React Applications",
+      "description": "A comprehensive guide to Next.js 13's App Router and how it reshapes routing in React apps.",
+      "tags": [
+        "tech"
+      ],
+      "publishDate": "2024-09-18T00:00:00.000Z",
+      "readingTime": "4 min read",
+      "uploaded": "2024-09-18T00:00:00.000Z",
+      "tag": "tech",
+      "heroImage": "/posts/post2.jpg"
+    }
+  ],
+  "tags": {
+    "popular": [
+      "small",
+      "ai",
+      "birthday",
+      "hello"
+    ],
+    "latest": [
+      "ai",
+      "birthday",
+      "hello",
+      "small"
+    ],
+    "top": [
+      "small",
+      "hello",
+      "ai"
+    ],
+    "web-development": [
+      "ai"
+    ],
+    "tech": [
+      "birthday",
+      "hello"
+    ],
+    "abstract": [
+      "small"
+    ]
+  }
+}

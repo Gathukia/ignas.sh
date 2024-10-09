@@ -1,0 +1,109 @@
+"use client";
+import React, { useState, useEffect } from 'react';
+import { useTheme } from 'next-themes';
+import { Sun, Moon, Clock, Twitter, Github, Linkedin, Instagram, Mail } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const iconMap = {
+  x: Twitter,
+  github: Github,
+  linkedin: Linkedin,
+  instagram: Instagram,
+  mail: Mail,
+};
+
+const SocialLink = ({ name, url }) => {
+  const Icon = iconMap[name];
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
+    >
+      <span className="hidden sm:inline capitalize">{name}</span>
+      <Icon className="w-5 h-5 inline sm:hidden sm:group-hover:inline" />
+    </a>
+  );
+};
+
+const ClockDisplay = () => {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="flex items-center space-x-2 text-muted-foreground">
+      <Clock className="w-4 h-4" />
+      <span className="text-sm">
+        {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+      </span>
+    </div>
+  );
+};
+
+const Footer = () => {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
+
+  return (
+    <footer className="mt-auto w-full bg-card border-t border-border py-4">
+      <div className="max-w-3xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
+        <div className="flex space-x-4">
+          <SocialLink name="x" url="https://x.com" />
+          <SocialLink name="github" url="https://github.com" />
+          <SocialLink name="linkedin" url="https://linkedin.com" />
+          <SocialLink name="instagram" url="https://instagram.com" />
+          <SocialLink name="mail" url="mailto:example@example.com" />
+        </div>
+        <div className="flex items-center space-x-4">
+          <a
+            href="https://github.com/yourusername/yourrepo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center space-x-2"
+          >
+            <Github className="w-4 h-4" />
+            <span>Source</span>
+          </a>
+          <ClockDisplay />
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full hover:bg-accent hover:text-accent-foreground focus:outline-none transition-colors"
+            title="Toggle theme"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={theme}
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 20, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {theme === 'dark' ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
+              </motion.div>
+            </AnimatePresence>
+            <span className="sr-only">Toggle theme</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

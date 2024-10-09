@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "id": "02ae98e2-6d72-49e9-8ff8-68c64494195b",
+    "slug": "birthday",
+    "title": "Next.js 13 App Router A New Era of React Applications",
+    "description": "A comprehensive guide to Next.js 13's App Router and how it reshapes routing in React apps.",
+    "tags": [
+      "tech"
+    ],
+    "publishDate": "2024-09-18T00:00:00.000Z",
+    "readingTime": "4 min read",
+    "uploaded": "2024-09-18T00:00:00.000Z",
+    "tag": "tech",
+    "heroImage": "/posts/post2.jpg"
+  },
+  "tableOfContents": [
+    {
+      "level": 1,
+      "title": "Next.js 13 App Router: A New Era of React Applications",
+      "id": "next-js-13-app-router-a-new-era-of-react-applications",
+      "url": "#next-js-13-app-router-a-new-era-of-react-applications"
+    },
+    {
+      "level": 2,
+      "title": "The Evolution of Routing in Next.js",
+      "id": "the-evolution-of-routing-in-next-js",
+      "url": "#the-evolution-of-routing-in-next-js"
+    },
+    {
+      "level": 2,
+      "title": "Key Features of the App Router",
+      "id": "key-features-of-the-app-router",
+      "url": "#key-features-of-the-app-router"
+    },
+    {
+      "level": 3,
+      "title": "New Directory Structure",
+      "id": "new-directory-structure",
+      "url": "#new-directory-structure"
+    },
+    {
+      "level": 3,
+      "title": "Layouts",
+      "id": "layouts",
+      "url": "#layouts"
+    },
+    {
+      "level": 3,
+      "title": "Server Components by Default",
+      "id": "server-components-by-default",
+      "url": "#server-components-by-default"
+    },
+    {
+      "level": 3,
+      "title": "Improved Data Fetching",
+      "id": "improved-data-fetching",
+      "url": "#improved-data-fetching"
+    },
+    {
+      "level": 3,
+      "title": "Streaming and Suspense",
+      "id": "streaming-and-suspense",
+      "url": "#streaming-and-suspense"
+    },
+    {
+      "level": 2,
+      "title": "Migrating to the App Router",
+      "id": "migrating-to-the-app-router",
+      "url": "#migrating-to-the-app-router"
+    },
+    {
+      "level": 2,
+      "title": "Conclusion",
+      "id": "conclusion",
+      "url": "#conclusion"
+    }
+  ],
+  "content": "\r\n\r\n# Next.js 13 App Router: A New Era of React Applications\r\n\r\nNext.js 13 introduced a game-changing feature: the App Router. This new routing paradigm, built on React Server Components, promises to revolutionize how we build and structure Next.js applications. In this comprehensive guide, we'll explore the App Router, its benefits, and how to leverage its power in your projects.\r\n\r\n## The Evolution of Routing in Next.js\r\n\r\nTraditionally, Next.js used a file-system based routing housed in the `pages` directory. While effective, this approach had limitations, particularly when it came to layouts and nested routing. The App Router addresses these limitations and introduces a more intuitive and powerful way to structure your application.\r\n\r\n## Key Features of the App Router\r\n\r\n### New Directory Structure\r\n\r\nThe App Router introduces a new `app` directory that coexists with the `pages` directory. This new structure allows for:\r\n\r\n- Easier colocating of related files\r\n- Improved project organization\r\n- More intuitive nested routing\r\n\r\nHere's a basic example of the new structure:\r\n\r\n```plaintext title=\"app-directory-structure.txt\" showLineNumbers\r\napp/\r\n├── layout.js\r\n├── page.js\r\n├── blog/\r\n│   ├── layout.js\r\n│   ├── page.js\r\n│   └── [slug]/\r\n│       └── page.js\r\n└── about/\r\n    └── page.js\r\n```\r\n\r\n### Layouts\r\n\r\nLayouts in the App Router allow you to define UI that is shared across multiple pages. They remain interactive even when the page beneath them changes.\r\n\r\n```jsx title=\"app/layout.js\" showLineNumbers\r\nexport default function RootLayout({ children }) {\r\n  return (\r\n    <html lang=\"en\">\r\n      <body>\r\n        <header>\r\n          {/* Your header content */}\r\n        </header>\r\n        <main>{children}</main>\r\n        <footer>\r\n          {/* Your footer content */}\r\n        </footer>\r\n      </body>\r\n    </html>\r\n  )\r\n}\r\n```\r\n\r\n### Server Components by Default\r\n\r\nAll components inside the `app` directory are React Server Components by default. This means they're rendered on the server, which can lead to improved performance and smaller bundle sizes.\r\n\r\n```jsx title=\"app/page.js\" showLineNumbers\r\nasync function getData() {\r\n  const res = await fetch('https://api.example.com/data')\r\n  return res.json()\r\n}\r\n\r\nexport default async function Page() {\r\n  const data = await getData()\r\n  \r\n  return <main>{/* Render your data */}</main>\r\n}\r\n```\r\n\r\n### Improved Data Fetching\r\n\r\nThe App Router introduces new data fetching methods that are more aligned with Server Components:\r\n\r\n```jsx title=\"app/users/page.js\" showLineNumbers\r\nasync function getUsers() {\r\n  const res = await fetch('https://api.example.com/users', { next: { revalidate: 60 } })\r\n  return res.json()\r\n}\r\n\r\nexport default async function UsersPage() {\r\n  const users = await getUsers()\r\n  return (\r\n    <ul>\r\n      {users.map((user) => (\r\n        <li key={user.id}>{user.name}</li>\r\n      ))}\r\n    </ul>\r\n  )\r\n}\r\n```\r\n\r\nThis approach allows for more granular control over caching and revalidation.\r\n\r\n### Streaming and Suspense\r\n\r\nThe App Router fully supports React's Suspense feature, allowing you to easily show loading states while content is being fetched:\r\n\r\n```jsx title=\"app/page.js\" showLineNumbers\r\nimport { Suspense } from 'react'\r\nimport Loading from './loading'\r\n\r\nexport default function Page() {\r\n  return (\r\n    <section>\r\n      <h1>My Users</h1>\r\n      <Suspense fallback={<Loading />}>\r\n        <UserList />\r\n      </Suspense>\r\n    </section>\r\n  )\r\n}\r\n```\r\n\r\n## Migrating to the App Router\r\n\r\nWhile the App Router brings many benefits, migrating an existing project requires careful planning. Here are some steps to consider:\r\n\r\n1. Start by creating an `app` directory in your project root.\r\n2. Move your `_app.js` and `_document.js` logic into a root layout file (`app/layout.js`).\r\n3. Gradually move your pages from the `pages` directory to the `app` directory, converting them to the new routing paradigm.\r\n4. Update your data fetching methods to align with the new Server Component approach.\r\n5. Leverage new features like nested layouts and loading UI as you migrate.\r\n\r\n## Conclusion\r\n\r\nThe Next.js 13 App Router represents a significant leap forward in React application development. By embracing React Server Components, providing more intuitive routing, and offering powerful features like nested layouts and improved data fetching, it sets a new standard for building performant and scalable web applications.\r\n\r\nAs you explore the App Router, you'll discover its potential to streamline your development process and enhance your application's performance. While the migration process may take time, the benefits in terms of code organization, performance, and developer experience make it a worthwhile endeavor for any Next.js project.\r\n\r\nRemember, the Next.js team is continuously improving and expanding the App Router's capabilities, so stay tuned for even more exciting features in the future!"
+}
