@@ -1,6 +1,8 @@
 import axios from 'axios';
 import querystring from 'querystring';
 
+export const runtime = 'edge';
+
 export async function POST(req) {
   const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = process.env;
 

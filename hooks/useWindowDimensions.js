@@ -1,4 +1,3 @@
-// File: hooks/useWindowDimensions.js
 'use client'
 
 import { useState, useEffect } from 'react'

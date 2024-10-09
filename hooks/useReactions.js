@@ -1,4 +1,3 @@
-// File: hooks/useReactions.js
 'use client'
 
 import confetti from 'canvas-confetti'
