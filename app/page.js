@@ -9,6 +9,7 @@ import Articles from './Components/Articles';
 import Projects from './Components/Projects';
 import ActivityComponent from './Components/ActivityComponent'
 import Footer from './Components/Footer';
+import Contact from './Components/Contact';
 import ProgressiveBlur from './Components/Blur'
 
 export default function Home() {
@@ -16,7 +17,7 @@ export default function Home() {
     <BackgroundContainer contentType="written">
       <div className="min-h-screen bg-scrool bg-background dark:bg-transparent text-foreground">
         <Navbar/>
-        <main className="max-w-xl mx-auto px-4 py-12">
+        <main className="max-w-xl mx-auto px-4 pt-12 pb-2">
           <article>
 
             {/* Introduction */}
@@ -43,10 +44,16 @@ export default function Home() {
             <ProgressiveBlur index={4} className="mb-4">
               <ActivityComponent/>
             </ProgressiveBlur>
+
+            {/* contact Section */}
+            <ProgressiveBlur index={6} className="">
+              <Contact/>
+            </ProgressiveBlur>
+
           </article>
         </main>
             {/* About Section */}
-            <ProgressiveBlur index={5} className="mb-4">
+            <ProgressiveBlur index={7} className="mb-4">
               <Footer/>
             </ProgressiveBlur>
       </div>

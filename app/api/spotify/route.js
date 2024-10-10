@@ -1,5 +1,4 @@
 import axios from 'axios';
-import querystring from 'querystring';
 
 export const runtime = 'edge';
 
@@ -10,12 +9,14 @@ export async function POST(req) {
 
   try {
     // Step 1: Get access token using the refresh token
+    const body = new URLSearchParams({
+      grant_type: 'refresh_token',
+      refresh_token: SPOTIFY_REFRESH_TOKEN,
+    });
+
     const tokenResponse = await axios.post(
       'https://accounts.spotify.com/api/token',
-      querystring.stringify({
-        grant_type: 'refresh_token',
-        refresh_token: SPOTIFY_REFRESH_TOKEN,
-      }),
+      body.toString(),
       {
         headers: {
           Authorization: `Basic ${authString}`,
