@@ -22,7 +22,7 @@ const ActivityLayout = ({ children, location, fallbackLocation = 'Nairobi' }) =>
       <div>{children}</div>
       <div className="flex items-center justify-between bg-gray-50 dark:bg-neutral-900 border-t border-border px-2 py-2 rounded-b-3xl">
         <p className="text-sm text-gray-600 dark:text-gray-300">
-          Right now am currently in <span className="underline">{currentLocation}</span> 📍
+          Right now I&apos;m currently in <span className="underline">{currentLocation}</span> 📍
         </p>
       </div>
     </div>
@@ -32,7 +32,7 @@ const ActivityLayout = ({ children, location, fallbackLocation = 'Nairobi' }) =>
 const MusicComponent = () => {
   return (
     <div className="bg-transparent">
-      <p className="text-sm text-muted-foreground mb-4">What I'm currently listening to on Spotify:</p>
+      <p className="text-sm text-muted-foreground mb-4">What I&apos;m currently listening to on Spotify:</p>
       <div className="w-full bg-gray-50 dark:bg-neutral-900 border border-border border-2 px-1 pt-px rounded-t-lg rounded-b-3xl">
         <div className="w-full lg:h-[170px] shadow-xlg">
           <SpotifyPlayer />
@@ -76,7 +76,7 @@ const ActivityComponent = () => {
       <div className="mb-6">
         <h2 className="text-lg font-bold mb-3 text-primary">Activity</h2>
         <p className="text-sm text-muted-foreground mb-4">
-          Stay updated on what's happening. Follow me on <span className="line-through">Twitter</span> X for more updates.
+          Stay updated on what's happening.
         </p>
         <ActivityLayout location={location} isFallback={isFallback}>
           <div className="space-y-4">

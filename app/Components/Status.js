@@ -63,7 +63,7 @@ export const PingingStatus = ({ status }) => {
 
 // Avatar component
 export const Avatar = ({ avatarUrl }) => (
-  <img src={avatarUrl} alt="Profile" className="w-12 h-12 rounded-full" />
+  <image src={avatarUrl} alt="Profile" className="w-12 h-12 rounded-full" />
 );
 
 // StatusHeader component

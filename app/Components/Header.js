@@ -1,27 +1,26 @@
 import React from 'react';
-import { Twitter, Github, Linkedin, Instagram, Mail } from 'lucide-react';
 import { Verified } from '../Ui/Verified';
 import ProfileImageLarge from '../Ui/ProfileImage';
+import { X, Github, Linkedin, Instagram, Mail } from '../Ui/Icons';
 
 const socialLinks = [
-  { name: 'X', icon: Twitter, url: 'https://x.com' },
-  { name: 'GitHub', icon: Github, url: 'https://github.com' },
-  { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com' },
-  { name: 'Instagram', icon: Instagram, url: 'https://instagram.com' },
-  { name: 'Mail', icon: Mail, url: 'mailto:example@example.com' },
+  { name: 'X', Icon: X, url: 'https://x.com' },
+  { name: 'GitHub', Icon: Github, url: 'https://github.com' },
+  { name: 'LinkedIn', Icon: Linkedin, url: 'https://linkedin.com' },
+  { name: 'Instagram', Icon: Instagram, url: 'https://instagram.com' },
+  { name: 'Mail', Icon: Mail, url: 'mailto:example@example.com' },
 ];
 
-const SocialLink = ({ name, icon: Icon, url }) => (
+const SocialLink = ({ name, Icon, url }) => (
   <a
     href={url}
     target="_blank"
     rel="noopener noreferrer"
-    className="text-sm text-muted-foreground hover:text-foreground transition-colors group"
+    className="text-sm text-muted-foreground hover:text-foreground transition-colors group relative"
   >
-    <span className="md:hidden underline">{name}</span>
-    <span className="hidden md:flex items-center space-x-1">
-      <span>{name}</span>
-      <Icon className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+    <span className="relative z-10 md:pr-6">{name}</span>
+    <span className="absolute inset-y-0 right-0 w-6 flex items-center justify-center">
+      <Icon className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out transform group-hover:-translate-y-1" />
     </span>
   </a>
 );

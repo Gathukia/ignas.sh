@@ -84,7 +84,7 @@ const SpotifyPlayer = () => {
           <p className="text-sm text-muted-foreground flex items-center">
             {caption}{' '}
             {caption === 'Now Vibing' && (
-              <span className="ml-2 inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              <span className="ml-2 inline-block w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
             )}
           </p>
         </div>
@@ -136,7 +136,7 @@ const SpotifyPlayer = () => {
               isChanging={isChanging}
             />
           </div>
-          {renderTrackInfo(track, isPlaying ? 'Now Vibing' : 'Last Played')}
+          {renderTrackInfo(track, isPlaying ? 'Now Playing' : 'Last Played')}
         </div>
       </div>
     );

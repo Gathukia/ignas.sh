@@ -70,8 +70,8 @@ const PostCard = ({ post, index }) => {
               <Image
                 src={post.heroImage}
                 alt={post.title}
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: 'cover' }} // Apply objectFit as a style
                 className="w-full h-full"
               />
             </motion.div>
