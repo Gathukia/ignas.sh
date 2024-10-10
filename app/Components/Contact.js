@@ -4,7 +4,7 @@ import Link from 'next/link';
 import DiscordStatus from './Status';
 
 const EmphasizedText = ({ children }) => (
-  <span className="relative font-medium text-primary group-hover:text-primary-dark transition-colors duration-300">
+  <span className="relative font-medium text-accent-foreground dark:text-primary group-hover:text-primary-dark transition-colors duration-300">
     {children}
     <span className="absolute bottom-0 left-0 w-full h-[2px] bg-primary opacity-50 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
   </span>
@@ -13,7 +13,7 @@ const EmphasizedText = ({ children }) => (
 const ExitText = ({ text }) => (
   <div className="relative flex flex-items justify-center h-8 overflow-hidden mt-4">
     <p 
-      className="absolute text-sm font-bold text-primary opacity-20 transform rotate-6 transition-all duration-300 hover:opacity-100 hover:scale-105"
+      className="absolute text-sm font-bold text-muted-foreground dark:text-primary opacity-20 transform rotate-6 transition-all duration-300 hover:opacity-100 hover:scale-105"
       style={{ 
         textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
         animation: 'float 3s ease-in-out infinite'
@@ -34,7 +34,7 @@ const Contact = () => {
         <p className="text-sm leading-relaxed text-muted-foreground mb-4 group">
           The fastest way to get a response is to shoot me a DM on
             <Link href="https://x.com/ignas_edwin" target="_blank" rel="noopener noreferrer">
-                <EmphasizedText><span className="line-through">Twitter</span> X </EmphasizedText>
+                <EmphasizedText><span className="line-through">Twitter</span> X</EmphasizedText>
             </Link>
                 or <EmphasizedText>
             <Link href="https://discord.com/users/963425032426635345" target="_blank" rel="noopener noreferrer">

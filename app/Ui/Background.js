@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge';
 
 export const backgroundStyles = {
-  written: 'bg-primary/10',
+  written: 'bg-foreground dark:bg-primary/10',
   media: 'bg-background',
 };
 

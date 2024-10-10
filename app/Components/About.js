@@ -3,7 +3,7 @@ import React from 'react';
 const EmphasizedText = ({ children }) => (
   <span className="relative font-medium text-primary group-hover:text-primary-dark transition-colors duration-300">
     {children}
-    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-primary opacity-50 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-muted-foreground dark:bg-primary opacity-50 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
   </span>
 );
 

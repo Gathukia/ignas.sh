@@ -18,36 +18,47 @@ export const BlogHeader = ({
     : '';
 
   return (
-    <header className="relative bg-transparent w-full mx-auto pt-5 px-4 sm:px-4 lg:px-4">
-      {/* Background Image Overlay */}
+    <header className="relative bg-white dark:bg-transparent w-full mx-auto pt-5 px-4 sm:px-4 lg:px-4">
+      {/* Light Mode: Background Image Overlay */}
       <div
-        className="absolute inset-0 z-0 opacity-20"
+        className="absolute inset-0 z-0 opacity-0 dark:opacity-0 fade mix-blend-soft-light"
+        style={{
+          backgroundImage: `linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.6) 0%,
+            rgba(245, 245, 245, 0.8) 50%,
+            rgba(240, 240, 240, 0.95) 80%,
+            rgba(252, 251, 245, 0.99) 100%
+          ), url(${heroImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          filter: 'blur(0px)',
+          backdropFilter: 'blur(05px)',
+          height: 'calc(100% + 60px)',
+        }}
+      />
+
+      {/* Background Image Overlay (Dark Mode) */}
+      <div
+        className="absolute inset-0 z-0 opacity-0 dark:opacity-20"
         style={{
           backgroundImage: `linear-gradient(
             to bottom,
             rgba(0, 0, 0, 0) 0%,
             rgba(0, 0, 0, 0.2) 50%,
             rgba(0, 0, 0, 0.6) 75%,
-            rgba(0, 0, 0, 0.7) 80%,
-            rgba(0, 0, 0, 0.8) 100%,
+            rgba(10, 10, 10, 0.7) 80%,
+            rgba(30, 30, 30, 0.9) 89%,
+            rgba(45, 45, 45,1) 100%,
             transparent 100%
           ), url(${heroImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           filter: 'blur(8px)',
-          backdropFilter: 'blur(70px)',
-          height: 'calc(100% + 250px)',
-        }}
-      />
-
-      {/* Light Mode Overlay for better visibility */}
-      <div
-        className="absolute inset-0 z-0 bg-primary/02 opacity-10 linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7), rgba(255, 105, 235, 1) 100%, transparent 100%), fade -z-10 mt-0 object-cover mix-blend-soft-light pointer-events-none"
-        style={{
-          height: 'calc(100% + 250px)', // Ensure overlay height matches the background image height
-          mixBlendMode: 'lighten',
-          opacity: 'var(--light-mode-opacity, 1)', // Allow customization through CSS variables if needed
+          backdropFilter: 'blur(40px)',
+          height: 'calc(100% + 500px)',
         }}
       />
 
@@ -55,7 +66,7 @@ export const BlogHeader = ({
       <div className="relative max-w-2xl mx-auto z-10">
         <Link
           href="/blog"
-          className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-gray-900 transition-colors duration-200 mb-4"
+          className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200 mb-4"
         >
           <ArrowLeftIcon className="w-4 h-4 mr-2" />
           <span>Back to Blog Posts</span>
@@ -70,7 +81,7 @@ export const BlogHeader = ({
           </time>
 
           {/* Blog title */}
-          <h1 className="text-3xl md:text-3xl font-bold text-primary leading-tight mb-2">
+          <h1 className="text-3xl md:text-3xl font-bold text-primary dark:text-primary leading-tight mb-2">
             {title}
           </h1>
 

@@ -2,55 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Light theme (unchanged) */
+
+/* Light theme (redesigned for warm, minimal, and elegant feel) */
 @layer base {
   :root {
-    --background: 60 25% 89%;
-    --foreground: 35 85% 15%;
-    --card: 60 30% 97%;
-    --card-foreground: 35 85% 15%;
-    --popover: 60 30% 98%;
-    --popover-foreground: 35 85% 15%;
-    --primary: 35 85% 45%;
-    --primary-foreground: 60 30% 98%;
-    --secondary: 40 30% 92%;
-    --secondary-foreground: 35 85% 15%;
-    --muted: 40 30% 92%;
-    --muted-foreground: 35 60% 35%;
-    --accent: 30 70% 50%;
-    --accent-foreground: 60 30% 98%;
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 60 30% 98%;
-    --border: 40 30% 82%;
-    --input: 40 30% 82%;
-    --ring: 35 85% 45%;
-    --radius: 0.5rem;
+    --background: 48 38% 98%;    /* Warm, almost white background */
+    --foreground: 20 10% 15%;    /* Soft, dark charcoal for text */
+    
+    --card: 35 25% 96%;          /* Slightly warmer shade for cards */
+    --card-foreground: 20 10% 15%;
+    
+    --popover: 35 25% 96%;
+    --popover-foreground: 20 10% 15%;
+    
+    --primary: 60 7% 25%;       /* Rich, warm copper as primary color */
+    --primary-foreground: 40 30% 98%;
+    
+    --secondary: 30 20% 92%;     /* Light warm beige for secondary elements */
+    --secondary-foreground: 20 10% 15%;
+    
+    --muted: 30 15% 90%;
+    --muted-foreground: 30 05% 35%;
+    
+    --accent: 20 30% 85%;        /* Soft, peachy accent */
+    --accent-foreground: 20 10% 15%;
+    
+    --destructive: 0 85% 60%;    /* Bright, clear red for destructive actions */
+    --destructive-foreground: 40 30% 98%;
+    
+    --border: 30 15% 85%;
+    --input: 30 20% 92%;
+    --ring: 25 85% 55%;          /* Matching primary color */
+    
+    --radius: 0.4rem;            /* Slightly reduced border radius for a more minimal look */
   }
 }
 
-/* Dark theme (modified to use shades of black) */
+/* Dark theme (unchanged from previous version) */
 @layer base {
   .dark {
-    --background: 0 0% 7%; /* Very dark, almost black background */
-    --foreground: 0 0% 90%; /* Light gray for body text */
-    --card: 0 0% 10%; /* Slightly lighter black for cards */
-    --card-foreground: 0 0% 90%; /* Light gray for card text */
-    --popover: 102 5% 34%; /* Dark gray for popover */
-    --popover-foreground: 32 90% 49%; /* Light gray for popover text */
-    --primary: 0 0% 80%; /* Light gray for headers/links */
-    --primary-foreground: 0 0% 5%; /* Very dark gray for primary elements */
-    --secondary: 0 0% 15%; /* Dark gray for secondary elements */
-    --secondary-foreground: 0 0% 80%; /* Light gray for secondary text */
-    --muted: 120 5% 3%; /* Dark gray for muted elements */
-    --muted-foreground: 0 0% 60%; /* Dimmed gray for muted text */
-    --accent: 0 0% 25%; /* Dark gray for accents */
-    --accent-foreground: 0 0% 90%; /* Light gray for accent elements */
-    --destructive: 0 70% 50%; /* Keeping red for destructive actions */
-    --destructive-foreground: 0 0% 90%; /* Light gray for destructive text */
-    --border: 0 0% 15%; /* Darker border color */
-    --input: 0 0% 12%; /* Dark input background */
-    --ring: 0 0% 80%; /* Light gray ring */
-    --radius: 0.5rem; /* Rounded corners for consistency */
+    --background: 0 0% 7%;
+    --foreground: 0 0% 90%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 90%;
+    --popover:  0% 12%;
+    --popover-foreground: 0 0% 85%;
+    --primary: 48 0% 88%;
+    --primary-foreground: 0 0% 5%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 80%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 35 0% 75%;
+    --accent: 0 0% 25%;
+    --accent-foreground: 0 0% 90%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 90%;
+    --border: 0 0% 15%;
+    --input: 0 0% 12%;
+    --ring: 0 0% 80%;
+    --radius: 0.5rem;
   }
 }
 
