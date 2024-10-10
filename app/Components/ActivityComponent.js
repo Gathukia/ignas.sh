@@ -76,7 +76,7 @@ const ActivityComponent = () => {
       <div className="mb-6">
         <h2 className="text-lg font-bold mb-3 text-primary">Activity</h2>
         <p className="text-sm text-muted-foreground mb-4">
-          Stay updated on what's happening.
+          Stay updated on what&apos;s happening.
         </p>
         <ActivityLayout location={location} isFallback={isFallback}>
           <div className="space-y-4">
