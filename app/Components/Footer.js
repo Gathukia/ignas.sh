@@ -1,13 +1,14 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { Sun, Moon, Clock, Twitter, Github, Linkedin, Instagram, Mail } from 'lucide-react';
+import { Sun, Moon, Clock, Twitter, Github, Instagram, Mail } from 'lucide-react';
+import {Discord} from '../Ui/Icons';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const iconMap = {
   x: Twitter,
   github: Github,
-  linkedin: Linkedin,
+  discord: Discord,
   instagram: Instagram,
   mail: Mail,
 };
@@ -61,11 +62,11 @@ const Footer = () => {
     <footer className="mt-auto w-full bg-card border-t border-border py-4">
       <div className="max-w-3xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
         <div className="flex space-x-4">
-          <SocialLink name="x" url="https://x.com" />
-          <SocialLink name="github" url="https://github.com" />
-          <SocialLink name="linkedin" url="https://linkedin.com" />
-          <SocialLink name="instagram" url="https://instagram.com" />
-          <SocialLink name="mail" url="mailto:example@example.com" />
+          <SocialLink name="x" url="https://x.com/ignas_edwin" />
+          <SocialLink name="github" url="https://github.com/Gathukia" />
+          <SocialLink name="discord" url="https://discord.com/users/963425032426635345" />
+          <SocialLink name="instagram" url="https://instagram.com/_ignas254" />
+          <SocialLink name="mail" url="mailto:edwinngugi38@gmail.com" />
         </div>
         <div className="flex items-center space-x-4">
           <a

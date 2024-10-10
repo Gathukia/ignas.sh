@@ -6,6 +6,9 @@ import { useTheme } from 'next-themes';
 import { Cloud, Droplets, Sun, Wind } from 'lucide-react';
 
 const IntegratedComponent = () => {
+  const MIN_ZOOM = 10;
+  const MAX_ZOOM = 16;
+
   const [viewState, setViewState] = useState({
     longitude: 36.8219, // Coordinates for Nairobi
     latitude: -1.2921,
@@ -29,12 +32,13 @@ const IntegratedComponent = () => {
 
   const { theme } = useTheme();
   const mapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_API_KEY;
+  const weatherApiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
 
   useEffect(() => {
     const fetchWeather = async () => {
       try {
         const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=Nairobi&units=metric&appid=0c810144be0464204165656fd6763436`
+          `https://api.openweathermap.org/data/2.5/weather?q=Nairobi&units=metric&appid=${weatherApiKey}`
         );
         if (!response.ok) throw new Error('Failed to fetch weather data');
         const data = await response.json();
@@ -64,7 +68,7 @@ const IntegratedComponent = () => {
       clearInterval(timeInterval);
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, []);
+  }, [weatherApiKey]);
 
   const easeOutCubic = (t) => {
     return 1 - Math.pow(1 - t, 3);
@@ -103,7 +107,7 @@ const IntegratedComponent = () => {
   const handleZoom = useCallback(
     (direction) => {
       const zoomChange = direction === 'in' ? 1 : -1;
-      const targetZoom = Math.min(Math.max(viewState.zoom + zoomChange, 0), 22);
+      const targetZoom = Math.min(Math.max(viewState.zoom + zoomChange, MIN_ZOOM), MAX_ZOOM);
       smoothZoom(targetZoom);
     },
     [viewState.zoom, smoothZoom]
@@ -139,6 +143,9 @@ const IntegratedComponent = () => {
     ? 'mapbox://styles/mapbox/dark-v11'
     : 'mapbox://styles/mapbox/light-v11';
 
+  const canZoomOut = viewState.zoom > MIN_ZOOM;
+  const canZoomIn = viewState.zoom < MAX_ZOOM;
+
   return (
     <div className="relative w-full h-[300px] md:h-[300px] lg:h-[300px] rounded-3xl overflow-hidden shadow-lg">
       <Map
@@ -155,6 +162,8 @@ const IntegratedComponent = () => {
         touchZoom={false}
         touchRotate={false}
         keyboard={false}
+        minZoom={MIN_ZOOM}
+        maxZoom={MAX_ZOOM}
       >
         <Marker longitude={viewState.longitude} latitude={viewState.latitude} anchor="center">
           <div className={`relative transition-all duration-300 ease-out`} style={{ transform: `scale(${markerScale})` }}>
@@ -202,31 +211,37 @@ const IntegratedComponent = () => {
         </div>
       </div>
 
-      {/*zooming mechanisim*/}
-      <div className="absolute bottom-10 left-4">
-        <button
-          className="bg-white/60 dark:bg-black/60 text-black dark:text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-white/80 dark:hover:bg-black/80 transition-all duration-300 text-lg font-bold relative group"
-          onClick={() => handleZoom('out')}
-        >
-          −
-          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Zoom Out
-          </span>
-          <div className="absolute inset-0 rounded-full bg-white/30 dark:bg-black/30 scale-0 group-hover:scale-150 transition-transform duration-300"></div>
-        </button>
-      </div>
-      <div className="absolute bottom-10 right-4">
-        <button
-          className="bg-white/60 dark:bg-black/60 text-black dark:text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-white/80 dark:hover:bg-black/80 transition-all duration-300 text-lg font-bold relative group"
-          onClick={() => handleZoom('in')}
-        >
-          +
-          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Zoom In
-          </span>
-          <div className="absolute inset-0 rounded-full bg-white/30 dark:bg-black/30 scale-0 group-hover:scale-150 transition-transform duration-300"></div>
-        </button>
-      </div>
+      {/* Zoom out button */}
+      {canZoomOut && (
+        <div className="absolute bottom-10 left-4">
+          <button
+            className="bg-white/60 dark:bg-black/60 text-black dark:text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-white/80 dark:hover:bg-black/80 transition-all duration-300 text-lg font-bold relative group"
+            onClick={() => handleZoom('out')}
+          >
+            −
+            <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              Zoom Out
+            </span>
+            <div className="absolute inset-0 rounded-full bg-white/30 dark:bg-black/30 scale-0 group-hover:scale-150 transition-transform duration-300"></div>
+          </button>
+        </div>
+      )}
+
+      {/* Zoom in button */}
+      {canZoomIn && (
+        <div className="absolute bottom-10 right-4">
+          <button
+            className="bg-white/60 dark:bg-black/60 text-black dark:text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-white/80 dark:hover:bg-black/80 transition-all duration-300 text-lg font-bold relative group"
+            onClick={() => handleZoom('in')}
+          >
+            +
+            <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              Zoom In
+            </span>
+            <div className="absolute inset-0 rounded-full bg-white/30 dark:bg-black/30 scale-0 group-hover:scale-150 transition-transform duration-300"></div>
+          </button>
+        </div>
+      )}
 
       {/* Attribution */}
       <div className="absolute bottom-1 left-1 text-[8px] text-white/40 hover:text-white/60 transition-colors duration-200">

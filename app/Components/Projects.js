@@ -5,14 +5,14 @@ const featuredProjects = [
   {
     title: 'vm i/o',
     description: 'A minimal header file written in C to help you read terminal inputs such as complex key combinations and mouse movements when making terminal applications',
-    repo: 'https://github.com/Mayur57/countless',
+    repo: 'https://github.com/Gathukia/lavenshtine_distance',
     status: 'complete',
     tech: ['C', 'Terminal']
   },
   {
     title: 'Voom',
     description: 'A terminal-based text editor inspired by Vim',
-    repo: 'https://github.com/Mayur57/twitter-nuke',
+    repo: 'https://github.com/Gathukia/Voom-editor',
     status: 'complete',
     tech: ['Rust', 'Terminal']
   },
