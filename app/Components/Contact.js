@@ -32,7 +32,11 @@ const Contact = () => {
         <h2 className="text-xl font-bold mb-4 text-primary">Reach Me</h2>
         
         <p className="text-sm leading-relaxed text-muted-foreground mb-4 group">
-          The fastest way to get a response is to shoot me a DM on <EmphasizedText><span className="line-through">Twitter</span> X</EmphasizedText> or <EmphasizedText>
+          The fastest way to get a response is to shoot me a DM on
+            <Link href="https://x.com/ignas_edwin" target="_blank" rel="noopener noreferrer">
+                <EmphasizedText><span className="line-through">Twitter</span> X </EmphasizedText>
+            </Link>
+                or <EmphasizedText>
             <Link href="https://discord.com/users/963425032426635345" target="_blank" rel="noopener noreferrer">
               Discord
             </Link>
@@ -61,12 +65,16 @@ const Contact = () => {
             </Link>
           </EmphasizedText>. I&apos;ll get back to you ASAP.
         </p>
-  
+          
         <p className="text-sm leading-relaxed text-muted-foreground mt-4 mb-2 group">
-          I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+        Feel free to reach out to share an idea, tell a joke, or simply say hello.
+        </p>
+
+        <p className="text-sm leading-relaxed text-muted-foreground mt-4 mb-2 group">
+          I&apos;m always open to discussing new projects, creative ideas, or opportunities.
         </p>
   
-        <ExitText text="Adios, amigo!" />
+        <ExitText text="!gnas..., adios!" />
   
         <style jsx global>{`
           @keyframes float {
