@@ -3,8 +3,11 @@ import axios from 'axios';
 export const runtime = 'edge';
 
 export async function POST(req, env) {
-  // Access Cloudflare environment variables from the `env` object
-  const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = env;
+
+    // Access environment variables from the env object
+    const SPOTIFY_CLIENT_ID = context.env.SPOTIFY_CLIENT_ID;
+    const SPOTIFY_CLIENT_SECRET = context.env.SPOTIFY_CLIENT_SECRET;
+    const SPOTIFY_REFRESH_TOKEN = context.env.SPOTIFY_REFRESH_TOKEN;
 
   // Log the values for debugging
   console.log('Spotify Client ID:', SPOTIFY_CLIENT_ID); // Debugging log
