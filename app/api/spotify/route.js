@@ -4,7 +4,7 @@ export const runtime = 'edge';
 
 export async function POST(req) {
   // Load environment variables
-  const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = process.env;
+  const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = context.env;
 
   // Log the values for debugging
   console.log('Spotify Client ID:', SPOTIFY_CLIENT_ID); // Debugging log
