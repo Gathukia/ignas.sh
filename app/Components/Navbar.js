@@ -13,7 +13,7 @@ const Navbar = () => {
   const navItems = [
     { id: "about", title: "about", href: "/" },
     { id: "blog", title: "blog", href: "/blog" },
-    { id: "projects", title: "projects", href: "/Projects" }
+    { id: "project", title: "project", href: "/project" }
   ];
 
   useEffect(() => {
