@@ -3,8 +3,6 @@ import axios from 'axios';
 import SpotifyVisualizer from './Visualizer';
 import { useTheme } from 'next-themes';
 
-export const runtime = 'edge';
-
 const SpotifyPlayer = () => {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -12,6 +10,7 @@ const SpotifyPlayer = () => {
   const [isChanging, setIsChanging] = useState(false);
   const [isOnline, setIsOnline] = useState(true);
   const [topTracks, setTopTracks] = useState([]);
+  const [error, setError] = useState(null);
   const { theme } = useTheme();
 
   const fetchSpotifyData = async () => {
@@ -49,7 +48,7 @@ const SpotifyPlayer = () => {
 
   useEffect(() => {
     fetchSpotifyData();
-    const interval = setInterval(fetchSpotifyData, 5000); // Polling every 5 seconds
+    const interval = setInterval(fetchSpotifyData, 30000); // Polling every 30 seconds
 
     return () => clearInterval(interval);
   }, []);
@@ -145,10 +144,18 @@ const SpotifyPlayer = () => {
     );
   };
 
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-full bg-background text-foreground">
+        😔 Error: {error}
+      </div>
+    );
+  }
+
   if (!isOnline && !lastPlayedTrack) {
     return (
       <div className="flex items-center justify-center h-full bg-background text-foreground">
-        😔 No track playing
+        😔 No track playing. Please check your internet connection.
       </div>
     );
   }

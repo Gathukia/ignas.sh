@@ -112,7 +112,7 @@ const PostCard = ({ post, index }) => {
 };
 
 const TagsDisplay = ({ tags, selectedTag, onTagClick }) => (
-  <div className="space-y-4 relative bg-card md:ml-6 p-3 rounded-lg border border-border border-4 shadow-sm">
+  <div className="space-y-4 relative bg-card mx-4 p-3 rounded-ms rounded-br-2xl lg:rounded-bl-3xl lg:mr-2 lg:ml-4 border border-border border-4 shadow-sm">
     <div className="absolute -top-3 -left-3 bg-card border border-border border-4 rounded-full p-1">
       <Tags className="text-primary" size={24} />
     </div>
@@ -132,7 +132,7 @@ const TagsDisplay = ({ tags, selectedTag, onTagClick }) => (
         <button
           key={tag}
           onClick={() => onTagClick(tag)}
-          className={`px-2 py-1 rounded-full text-xs font-semibold transition-colors duration-300 ${
+          className={`px-2 py-1 rounded-3xl text-xs font-semibold transition-colors duration-300 ${
             selectedTag === tag
               ? 'bg-primary text-primary-foreground'
               : 'bg-secondary-foreground/10 text-secondary-foreground hover:bg-primary/20'
@@ -185,7 +185,7 @@ export const FilteredPosts = ({ initialPosts, initialTags }) => {
                 placeholder="Search posts..."
                 value={searchTerm}
                 onChange={handleSearchChange}
-                className="w-full px-3 py-2 bg-input text-foreground border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
+                className="w-full px-3 py-2 bg-input text-foreground border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
               />
             </div>
           </div>
@@ -250,13 +250,13 @@ export const FilteredPosts = ({ initialPosts, initialTags }) => {
         </div>
 
         {isSearching && (
-          <div className="mb-6">
+          <div className="mb-6 mx-2">
             <input
               type="text"
               placeholder="Search posts..."
               value={searchTerm}
               onChange={handleSearchChange}
-              className="w-full px-4 py-2 bg-input text-foreground border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
+              className="w-full px-4 py-2 bg-input text-foreground border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
             />
           </div>
         )}
