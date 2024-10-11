@@ -44,7 +44,7 @@ const Articles = () => {
     <div className="bg-transparent mx-auto relative pb-6">
       <h2 className="text-lg font-bold mb-3 text-primary">Articles and Thoughts</h2>
       <p className="text-sm text-muted-foreground mb-4">
-        Welcome to my blog. Here, I write about web development, React, and frontend technologies.
+        Welcome to my blog. This is where I share my thoughts out loud!
       </p>
       <div>
         {latestArticles.map((article) => (

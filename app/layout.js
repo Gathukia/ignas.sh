@@ -34,8 +34,8 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://cdn.xeiaso.net/static/css/iosevka/family.css" />
       </head>
       <body className={`${play.variable} ${inter.variable} ${spaceMono.variable} font-inter`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex flex-col min-h-screen">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <div className="flex flex-col min-h-screen antialiased selection:bg-neutral-500/90 selection:text-white">
             <main className="flex-grow">
               {children}
             </main>

@@ -13,7 +13,7 @@ const Navbar = () => {
   const navItems = [
     { id: "about", title: "about", href: "/" },
     { id: "blog", title: "blog", href: "/blog" },
-    { id: "projects", title: "projects", href: "/projects" }
+    { id: "projects", title: "projects", href: "/Projects" }
   ];
 
   useEffect(() => {
@@ -54,9 +54,9 @@ const Navbar = () => {
               <Link
                 href={item.href}
                 className={`
-                  relative block w-full py-2 text-center text-sm text-foreground rounded-full
+                  relative block w-full py-1 text-center text-sm text-foreground rounded-full
                   transition-colors duration-200 hover:bg-popover/50 focus:outline-none
-                  ${pathname === item.href ? "bg-popover text-popover-foreground font-semibold" : ""}
+                  ${pathname === item.href ? "bg-destructive text-destructive-foreground dark:bg-popover dark:text-popover-foreground font-semibold" : ""}
                   ${index === 0 ? "rounded-l-full" : ""}
                   ${index === navItems.length - 1 ? "rounded-r-full" : ""}
                 `}
@@ -65,7 +65,7 @@ const Navbar = () => {
               </Link>
               {pathname === item.href && (
                 <motion.div
-                  className="absolute top-2 right-2 w-1.5 h-1.5 bg-popover-foreground rounded-full"
+                  className="absolute top-2 right-2 w-1.5 h-1.5 bg-destructive-foreground dark:bg-popover-foreground rounded-full"
                   layoutId="activeIndicator"
                   initial={false}
                   transition={{

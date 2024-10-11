@@ -27,8 +27,8 @@
     --accent: 20 30% 85%;        /* Soft, peachy accent */
     --accent-foreground: 20 10% 15%;
     
-    --destructive: 0 85% 60%;    /* Bright, clear red for destructive actions */
-    --destructive-foreground: 40 30% 98%;
+    --destructive: 64 41% 90%;    /* Bright, clear red for destructive actions */
+    --destructive-foreground: 32 90% 49%;
     
     --border: 30 15% 85%;
     --input: 30 20% 92%;
@@ -45,8 +45,8 @@
     --foreground: 0 0% 90%;
     --card: 0 0% 10%;
     --card-foreground: 0 0% 90%;
-    --popover:  0% 12%;
-    --popover-foreground: 0 0% 85%;
+    --popover: 30 15% 28%;
+    --popover-foreground: 32 90% 49%;
     --primary: 48 0% 88%;
     --primary-foreground: 0 0% 5%;
     --secondary: 0 0% 15%;

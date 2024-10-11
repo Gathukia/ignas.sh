@@ -70,7 +70,7 @@ const Footer = () => {
         </div>
         <div className="flex items-center space-x-4">
           <a
-            href="https://github.com/yourusername/yourrepo"
+            href="https://github.com/Gathukia/ignas.sh"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center space-x-2"

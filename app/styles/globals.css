@@ -43,6 +43,16 @@
   background: hsl(var(--primary) / 0.8);
 }
 
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+}
+
 /* Firefox */
 * {
   scrollbar-width: thin;

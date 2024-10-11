@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Verified } from '../Ui/Verified';
 import ProfileImageLarge from '../Ui/ProfileImage';
 import { X, Github, Linkedin, Instagram, Mail, Discord } from '../Ui/Icons';
+import { Skeleton } from "@/components/ui/skeleton"
 
 const socialLinks = [
   { name: 'X.com', Icon: X, url: 'https://x.com/ignas_edwin' },
@@ -26,25 +27,60 @@ const SocialLink = ({ name, Icon, url }) => (
 );
 
 const Header = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="bg-transparent text-foreground">
       <div className="flex items-center space-x-4 mb-4">
-        <ProfileImageLarge />
+        {isLoading ? (
+          <Skeleton className="w-16 h-16 rounded-xl" />
+        ) : (
+          <ProfileImageLarge />
+        )}
         <div>
           <div className="flex items-center space-x-1">
-            <h1 className="text-sm font-bold text-primary">!gnas</h1>
-            <Verified className="text-accent" />
+            {isLoading ? (
+              <Skeleton className="h-5 w-20" />
+            ) : (
+              <>
+                <h1 className="text-sm font-bold text-primary">!gnas</h1>
+                <Verified className="text-accent" />
+              </>
+            )}
           </div>
-          <p className="text-xs text-muted-foreground pt-3">
-            an Indie hacker building stuff on and off the WEB.
-          </p>
+          {isLoading ? (
+            <Skeleton className="h-4 w-48 mt-3" />
+          ) : (
+            <p className="text-xs text-muted-foreground pt-3">
+              an Indie hacker building stuff on and off the WEB.
+            </p>
+          )}
         </div>
       </div>
       <div className="flex justify-center">
         <div className="flex mt-2 space-x-3 md:space-x-4 flex-wrap">
-          {socialLinks.map((link) => (
-            <SocialLink key={link.name} {...link} />
-          ))}
+          {isLoading ? (
+            <>
+              <Skeleton className="h-4 w-12" />
+              <Skeleton className="h-4 w-12" />
+              <Skeleton className="h-4 w-12" />
+              <Skeleton className="h-4 w-12" />
+              <Skeleton className="h-4 w-12" />
+            </>
+          ) : (
+            socialLinks.map((link) => (
+              <SocialLink key={link.name} {...link} />
+            ))
+          )}
         </div>
       </div>
     </div>

@@ -34,9 +34,8 @@ const Contact = () => {
         <p className="text-sm leading-relaxed text-muted-foreground mb-4 group">
           The fastest way to get a response is to shoot me a DM on
             <Link href="https://x.com/ignas_edwin" target="_blank" rel="noopener noreferrer">
-                <EmphasizedText><span className="line-through">Twitter</span> X</EmphasizedText>
-            </Link>
-                or <EmphasizedText>
+                <EmphasizedText><span className="line-through"> Twitter</span> X</EmphasizedText>
+            </Link> or <EmphasizedText>
             <Link href="https://discord.com/users/963425032426635345" target="_blank" rel="noopener noreferrer">
               Discord
             </Link>
@@ -78,9 +77,9 @@ const Contact = () => {
   
         <style jsx global>{`
           @keyframes float {
-            0% { transform: translateY(0px) rotate(6deg); }
-            50% { transform: translateY(-10px) rotate(6deg); }
-            100% { transform: translateY(0px) rotate(6deg); }
+            0% { transform: translateY(0px) rotate(13deg); }
+            50% { transform: translateY(6px) rotate(13deg); }
+            100% { transform: translateY(0px) rotate(13deg); }
           }
         `}</style>
       </div>

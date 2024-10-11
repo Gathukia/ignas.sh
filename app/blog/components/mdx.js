@@ -143,7 +143,7 @@ const MDX = async (props) => (
           <code className={cn("px-1 py-0.5 rounded bg-card dark:bg-card text-xs font-mono overflow-hidden", className)} {...props} />
         ),
         pre: ({ className, ...props }) => (
-          <pre className={cn("p-4 my-6 rounded-3xl border border-border border-4 bg-card dark:bg-card overflow-hidden", className)} {...props} />
+          <pre className={cn("p-4 my-6 rounded-3xl rounded-b-lg border border-border border-4 bg-card dark:bg-card overflow-hidden", className)} {...props} />
         ),
         ...(props.components || {}),
       }}

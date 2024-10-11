@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import SpotifyVisualizer from './Visualizer';
 import { useTheme } from 'next-themes';
+
+export const runtime = 'edge';
 
 const SpotifyPlayer = () => {
   const [currentTrack, setCurrentTrack] = useState(null);
@@ -8,42 +11,43 @@ const SpotifyPlayer = () => {
   const [lastPlayedTrack, setLastPlayedTrack] = useState(null);
   const [isChanging, setIsChanging] = useState(false);
   const [isOnline, setIsOnline] = useState(true);
+  const [topTracks, setTopTracks] = useState([]);
   const { theme } = useTheme();
 
-  useEffect(() => {
-    const fetchSpotifyData = async () => {
-      try {
-        const response = await fetch('/api/spotify', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+  const fetchSpotifyData = async () => {
+    try {
+      const response = await axios.post('/api/spotify', {}, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-        if (response.ok) {
-          const data = await response.json();
+      if (response.status === 200) {
+        const data = response.data;
+        setIsChanging(true);
+        setTimeout(() => {
           if (data.nowPlaying && data.nowPlaying.item) {
-            setIsChanging(true);
-            setTimeout(() => {
-              setCurrentTrack(data.nowPlaying.item);
-              setIsPlaying(data.nowPlaying.is_playing);
-              if (!data.nowPlaying.is_playing) {
-                setLastPlayedTrack(data.nowPlaying.item);
-              }
-              setIsChanging(false);
-            }, 500);
+            setCurrentTrack(data.nowPlaying.item);
+            setIsPlaying(data.nowPlaying.is_playing);
+            if (!data.nowPlaying.is_playing) {
+              setLastPlayedTrack(data.nowPlaying.item);
+            }
           }
-          setIsOnline(true);
-        } else {
-          console.error('Failed to fetch Spotify data');
-          setIsOnline(false);
-        }
-      } catch (error) {
-        console.error('Error fetching Spotify data:', error);
+          setTopTracks(data.topTracks);
+          setIsChanging(false);
+        }, 500);
+        setIsOnline(true);
+      } else {
+        console.error('Failed to fetch Spotify data');
         setIsOnline(false);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching Spotify data:', error);
+      setIsOnline(false);
+    }
+  };
 
+  useEffect(() => {
     fetchSpotifyData();
     const interval = setInterval(fetchSpotifyData, 5000); // Polling every 5 seconds
 
@@ -80,7 +84,7 @@ const SpotifyPlayer = () => {
     return (
       <div className="w-2/3 px-3">
         <div className="flex items-center justify-between mb-2">
-          <p className="text-sm text-muted-foreground flex items-center">
+          <p className="text-sm text-foreground flex items-center">
             {caption}{' '}
             {caption === 'Now Vibing' && (
               <span className="ml-2 inline-block w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
@@ -119,11 +123,11 @@ const SpotifyPlayer = () => {
 
     return (
       <div
-        className="relative h-full w-full overflow-hidden rounded-lg shadow-lg cursor-pointer"
+        className="relative h-full w-full overflow-hidden rounded-lg border border-border border-2 drop-shadow-xl cursor-pointer"
         onClick={() => handleClick(track)}
       >
         <div
-          className="absolute inset-0 bg-cover bg-center filter blur-md"
+          className="absolute inset-0 bg-cover bg-center filter blur brightness-90 dark:blur-md dark:brightness-50"
           style={{ backgroundImage: `url(${track.album.images[0].url})` }}
         />
         <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-background/70' : 'bg-background/30'}`} />
