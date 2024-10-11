@@ -61,7 +61,7 @@ const Projects = () => {
         ))}
       </div>
       <a
-        href="/projects"
+        href="/project"
         className="absolute bottom-0 right-0 text-sm text-primary flex items-center group hover:text-primary/80 transition-colors duration-300"
       >
         View All 
