@@ -155,7 +155,7 @@ const SpotifyPlayer = () => {
   if (!isOnline && !lastPlayedTrack) {
     return (
       <div className="flex items-center justify-center h-full bg-background text-foreground">
-        😔 No track playing. Please check your internet connection.
+        😔 No track playing.
       </div>
     );
   }
