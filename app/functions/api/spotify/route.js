@@ -3,7 +3,11 @@ import axios from 'axios';
 export const runtime = 'edge';
 
 export async function POST(req) {
-  const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = process.env;
+ 
+    // Access environment variables from the env object
+    const SPOTIFY_CLIENT_ID = env.SPOTIFY_CLIENT_ID;
+    const SPOTIFY_CLIENT_SECRET = env.SPOTIFY_CLIENT_SECRET;
+    const SPOTIFY_REFRESH_TOKEN = env.SPOTIFY_REFRESH_TOKEN;
 
   const authString = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
 
