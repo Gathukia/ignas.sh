@@ -4,9 +4,9 @@ export const runtime = 'edge';
 
 export async function POST(req, env, ctx) {
     // Access environment variables from the env object
-    const SPOTIFY_CLIENT_ID = env.SPOTIFY_CLIENT_ID;
-    const SPOTIFY_CLIENT_SECRET = env.SPOTIFY_CLIENT_SECRET;
-    const SPOTIFY_REFRESH_TOKEN = env.SPOTIFY_REFRESH_TOKEN;
+    const SPOTIFY_CLIENT_ID = env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
+    const SPOTIFY_CLIENT_SECRET = env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
+    const SPOTIFY_REFRESH_TOKEN = env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN;
 
     // Log the values for debugging
     console.log('Spotify Client ID:', SPOTIFY_CLIENT_ID); // Debugging log
