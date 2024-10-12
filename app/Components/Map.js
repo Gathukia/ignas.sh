@@ -6,13 +6,13 @@ import { useTheme } from 'next-themes';
 import { Cloud, Droplets, Sun, Wind } from 'lucide-react';
 
 const IntegratedComponent = () => {
-  const MIN_ZOOM = 10;
-  const MAX_ZOOM = 16;
+  const MIN_ZOOM = 8;
+  const MAX_ZOOM = 13;
 
   const [viewState, setViewState] = useState({
     longitude: 36.8219, // Coordinates for Nairobi
     latitude: -1.2921,
-    zoom: 12,
+    zoom: 10,
     bearing: 0,
     pitch: 0,
   });
@@ -140,8 +140,8 @@ const IntegratedComponent = () => {
   }
 
   const mapStyle = theme === 'dark'
-    ? 'mapbox://styles/mapbox/dark-v11'
-    : 'mapbox://styles/mapbox/light-v11';
+    ? 'mapbox://styles/edwin-ignas/cm25yzomt00bw01pgd4xu2qmw'
+    : 'mapbox://styles/edwin-ignas/cm25x6062003d01pjb9rk3n6i';
 
   const canZoomOut = viewState.zoom > MIN_ZOOM;
   const canZoomIn = viewState.zoom < MAX_ZOOM;

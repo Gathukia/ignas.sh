@@ -34,7 +34,7 @@ const MusicComponent = () => {
     <div className="bg-transparent">
       <p className="text-sm text-muted-foreground mb-4">What I&apos;m currently listening to on Spotify:</p>
       <div className="w-full bg-gray-50 dark:bg-neutral-900 border border-border border-2 rounded-t-xl rounded-b-3xl">
-        <div className="w-full lg:h-[150px] shadow-xlg">
+        <div className="w-full shadow-xlg">
           <SpotifyPlayer />
         </div>
         <div className="text-right px-4">

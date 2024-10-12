@@ -126,8 +126,8 @@ const SpotifyPlayer = () => {
   const renderTrackInfo = (track, caption) => {
     if (!track) return null;
     return (
-      <div className="w-2/3 px-3">
-        <div className="flex items-center justify-between mb-2">
+      <div className="w-2/3 px-2 md:px-4 lg:px-4">
+        <div className="flex items-center justify-between mb-4 md:mb-6 lg:mb-8">
           <p className="text-sm text-foreground flex items-center">
             {caption}{' '}
             {caption === 'Now Vibing' && (
@@ -135,7 +135,7 @@ const SpotifyPlayer = () => {
             )}
           </p>
         </div>
-        <div className="overflow-hidden h-1/2 mb-2">
+        <div className="overflow-hidden h-1/2 mb-2 md:mb-4 lg:mb-6">
           {track.name && track.name.length > 20 ? (
             <div className="whitespace-nowrap animate-marquee-loop">
               <p className="text-lg font-bold text-foreground">{track.name}</p>
@@ -145,7 +145,7 @@ const SpotifyPlayer = () => {
             <p className="text-lg font-bold text-foreground">{track.name || 'Unknown Track'}</p>
           )}
         </div>
-        <p className="text-sm text-muted-foreground">{getArtistName(track.artists)}</p>
+        <p className="text-sm text-primary">{getArtistName(track.artists)}</p>
       </div>
     );
   };
@@ -192,7 +192,7 @@ const SpotifyPlayer = () => {
   if (error) {
     return (
       <div className="flex items-center justify-center h-full bg-background text-foreground">
-        😔 Error: {error}
+        😔 No track playing.
       </div>
     );
   }

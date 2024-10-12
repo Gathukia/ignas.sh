@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowUpRight, ChevronRight } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const latestArticles = [
   {
@@ -18,18 +17,15 @@ const latestArticles = [
 ];
 
 const AnimatedArrow = () => (
-  <motion.div
-    whileHover={{ scale: 1.2, rotate: 45 }}
-    transition={{ type: "spring", stiffness: 260, damping: 20 }}
-  >
+  <div className="transform transition-all duration-300 ease-in-out group-hover:rotate-45 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
     <ArrowUpRight className="text-primary" size={24} />
-  </motion.div>
+  </div>
 );
 
 const BlogPreview = ({ title, description, slug, date }) => (
-  <a href={`/blog/${slug}`} className="block bg-background mb-4 p-4 border border-border rounded-2xl rounded-tr-3xl hover:shadow-md transition-shadow duration-200">
+  <a href={`/blog/${slug}`} className="group block bg-background mb-4 p-4 border border-border rounded-2xl rounded-tr-3xl hover:shadow-md transition-all duration-300 ease-in-out">
     <div className="flex items-center justify-between mb-2">
-      <h3 className="text-base font-semibold text-primary">{title}</h3>
+      <h3 className="text-base font-semibold text-primary group-hover:text-primary/80 transition-colors duration-300">{title}</h3>
       <AnimatedArrow />
     </div>
     <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{description}</p>
@@ -51,13 +47,13 @@ const Articles = () => {
           <BlogPreview key={article.slug} {...article} />
         ))}
       </div>
-      <motion.a 
-        href="/blog" 
-        className="absolute bottom-0 right-0 text-sm text-primary flex items-center"
-        whileHover={{ x: 5 }}
+      <a
+        href="/blog"
+        className="absolute bottom-0 right-0 text-sm text-primary flex items-center group hover:text-primary/80 transition-colors duration-300"
       >
-        View All <ChevronRight size={16} className="ml-1" />
-      </motion.a>
+        View All 
+        <ChevronRight size={16} className="ml-1 transition-transform duration-300 group-hover:translate-x-0.5" />
+      </a>
     </div>
   );
 };

@@ -118,4 +118,4 @@ Licensed under the [Creative Commons Attribution 4.0 International License](http
 
 Feel free to reach out!
 
-- Twitter: [@your_twitter](https://twitter.com/your_twitter)
+- Twitter: [@ignas](https://twitter.com/ignas_edwin)

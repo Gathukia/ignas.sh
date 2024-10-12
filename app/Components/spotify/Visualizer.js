@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const SpotifyVisualizer = ({ isPlaying, albumImageUrl }) => {
   const numSticks = 100;
@@ -35,7 +35,7 @@ const SpotifyVisualizer = ({ isPlaying, albumImageUrl }) => {
   const stickStyles = useMemo(() => {
     return Array.from({ length: numSticks }, (_, i) => {
       const stickType = getStickType(i);
-      const baseRadius = containerSize * 0.3;
+      const baseRadius = containerSize * 0.35;
       let baseHeight, width;
 
       if (stickType === 'long') {
@@ -84,7 +84,7 @@ const SpotifyVisualizer = ({ isPlaying, albumImageUrl }) => {
             amplitude = Math.random() * (containerSize * 0.025) + (containerSize * 0.025);
             frequency = Math.random() * 1 + 1;
           } else {
-            amplitude = Math.random() * (containerSize * 0.09) + (containerSize * 0.02);
+            amplitude = Math.random() * (containerSize * 0.06) + (containerSize * 0.02);
             frequency = Math.random() * 2 + 1;
           }
 
@@ -105,10 +105,11 @@ const SpotifyVisualizer = ({ isPlaying, albumImageUrl }) => {
   }, [isPlaying, containerSize, getStickType, stickStyles]);
 
   return (
-    <div ref={containerRef} className="relative w-full h-full">
-      {containerSize > 0 && (
-        <>
-          {stickStyles.map((style, i) => (
+    <div ref={containerRef} className="relative w-full h-full flex items-center justify-center bg-transparent">
+      <div className="relative" style={{ width: '100%', paddingBottom: '100%' }}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-full h-full rounded-full" />
+          {containerSize > 0 && stickStyles.map((style, i) => (
             <div
               key={i}
               ref={(el) => (sticksRef.current[i] = el)}
@@ -122,23 +123,25 @@ const SpotifyVisualizer = ({ isPlaying, albumImageUrl }) => {
               }}
             />
           ))}
-          <div 
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full overflow-hidden z-10"
-            style={{
-              width: `${containerSize * 0.55}px`,
-              height: `${containerSize * 0.55}px`,
-            }}
-          >
-            <motion.img 
-              src={albumImageUrl || "/api/placeholder/400/400"} 
-              alt="Album cover" 
-              className="w-full rounded-full outline outline-2 outline-offset-2 outline-primary border border-foreground h-full object-cover"
-              animate={{ rotate: isPlaying ? 360 : 0 }}
-              transition={{ duration: 10, repeat: isPlaying ? Infinity : 0, ease: "linear" }}
-            />
-          </div>
-        </>
-      )}
+          {containerSize > 0 && (
+            <div 
+              className="absolute rounded-full outline outline-2 outline-offset-2 outline-foreground top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full overflow-hidden z-10"
+              style={{
+                width: `${containerSize * 0.64}px`,
+                height: `${containerSize * 0.64}px`,
+              }}
+            >
+              <motion.img 
+                src={albumImageUrl || "/api/placeholder/400/400"} 
+                alt="Album cover" 
+                className="w-full rounded-full border border-popover-foreground dark:border-muted-foreground dark:border-blur h-full object-cover"
+                animate={{ rotate: isPlaying ? 360 : 0 }}
+                transition={{ duration: 10, repeat: isPlaying ? Infinity : 0, ease: "linear" }}
+              />
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
