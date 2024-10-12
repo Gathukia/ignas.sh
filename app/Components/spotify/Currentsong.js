@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import SpotifyVisualizer from './Visualizer';
 import { useTheme } from 'next-themes';
 
@@ -13,42 +12,88 @@ const SpotifyPlayer = () => {
   const [error, setError] = useState(null);
   const { theme } = useTheme();
 
+  const SPOTIFY_CLIENT_ID = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
+  const SPOTIFY_CLIENT_SECRET = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
+  const SPOTIFY_REFRESH_TOKEN = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN;
+
+  console.log("client id", SPOTIFY_CLIENT_ID);
+  console.log("client secret", SPOTIFY_CLIENT_SECRET);
+
+  const getAccessToken = async () => {
+    const basic = btoa(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`);
+    const response = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${basic}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: SPOTIFY_REFRESH_TOKEN,
+      }),
+    });
+
+    const data = await response.json();
+    return data.access_token;
+  };
+
+  const getNowPlaying = async (accessToken) => {
+    const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (response.status === 204) {
+      return null;
+    }
+
+    return await response.json();
+  };
+
+  const getTopTracks = async (accessToken) => {
+    const response = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=10', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const data = await response.json();
+    return data.items;
+  };
+
   const fetchSpotifyData = async () => {
     try {
-      const response = await axios.post('/api/spotify', {}, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const accessToken = await getAccessToken();
+      const nowPlayingData = await getNowPlaying(accessToken);
+      const topTracksData = await getTopTracks(accessToken);
 
-      if (response.status === 200) {
-        const data = response.data;
-        setIsChanging(true);
-        setTimeout(() => {
-          if (data.nowPlaying && data.nowPlaying.item) {
-            setCurrentTrack(data.nowPlaying.item);
-            setIsPlaying(data.nowPlaying.is_playing);
-            if (!data.nowPlaying.is_playing) {
-              setLastPlayedTrack(data.nowPlaying.item);
-            }
+      setIsChanging(true);
+      setTimeout(() => {
+        if (nowPlayingData && nowPlayingData.item) {
+          setCurrentTrack(nowPlayingData.item);
+          setIsPlaying(nowPlayingData.is_playing);
+          if (!nowPlayingData.is_playing) {
+            setLastPlayedTrack(nowPlayingData.item);
           }
-          setTopTracks(data.topTracks);
-          setIsChanging(false);
-        }, 500);
-        setIsOnline(true);
-      } else {
-        console.error('Failed to fetch Spotify data');
-        setIsOnline(false);
-      }
+        } else if (lastPlayedTrack) {
+          setCurrentTrack(null);
+          setIsPlaying(false);
+        }
+        setTopTracks(topTracksData);
+        setIsChanging(false);
+      }, 500);
+      setIsOnline(true);
     } catch (error) {
       console.error('Error fetching Spotify data:', error);
       setIsOnline(false);
+      setError('Failed to fetch Spotify data');
     }
   };
 
   useEffect(() => {
     fetchSpotifyData();
-    const interval = setInterval(fetchSpotifyData, 30000); // Polling every 30 seconds
+    const interval = setInterval(fetchSpotifyData, 15000); // Polling every 15 seconds
 
     return () => clearInterval(interval);
   }, []);
