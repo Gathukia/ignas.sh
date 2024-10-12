@@ -4,7 +4,7 @@ Welcome to **Ignas.sh**, my personal site built with Next.js. It features a bunc
 
 ## Live Site
 
-Check it out live: [ignas.sh](https://ignas-sh.pages.dev).
+Check the live version here: [ignas.sh](https://ignas-sh.pages.dev).
 
 
 ## Tech Stack
