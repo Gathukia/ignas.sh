@@ -20,12 +20,18 @@ To run the site locally:
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/yourusername/ignas-sh.git
+   git clone https://github.com/Gathukia/ignas.sh.git
    ```
+or
+
+```bash
+  git clone
+git@github:Gathukia/ignas.sh.git
+ ```
 
 2. Go to the project directory:
    ```bash
-   cd ignas-sh
+   cd ignas_app
    ```
 
 3. Install dependencies:
