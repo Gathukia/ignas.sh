@@ -61,6 +61,7 @@ const IgnasLarge = () => {
             quality={95}
             width={90}
             height={90}
+            loading = "eager"
             className="not-prose inline-block z-[5] h-24 w-24 rounded-xl object-cover saturate-0 contrast-125 border border-[#DADADA] dark:border-[#333] hover:h-32 hover:w-32 hover:saturate-100 hover:contrast-100 hover:rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
             alt="a cute photo of Ignas"
             placeholder="blur"

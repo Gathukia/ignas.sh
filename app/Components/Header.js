@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Verified } from '../Ui/Verified';
-import ProfileImageLarge from '../Ui/ProfileImage';
 import { X, Github, Linkedin, Instagram, Mail, Discord } from '../Ui/Icons';
 import { Skeleton } from "@/components/ui/skeleton"
+import Image from 'next/image';
+import DiscordStatus from './Status';
 
 const socialLinks = [
   { name: 'X.com', Icon: X, url: 'https://x.com/ignas_edwin' },
@@ -26,26 +27,60 @@ const SocialLink = ({ name, Icon, url }) => (
   </a>
 );
 
+const ProfileImage = ({ imageUrl, isLoading }) => (
+  <div className="relative flex items-center justify-center w-[100px] h-[100px]">
+    {isLoading ? (
+      <Skeleton className="w-[100px] h-[100px] rounded-xl" />
+    ) : (
+      <>
+        <Image
+          src={imageUrl}
+          quality={50}
+          width={100}
+          height={100}
+          className="absolute rounded-xl object-cover blur-lg opacity-50"
+          alt="Blurred background of Ignas"
+          priority={true}
+        />
+        <Image
+          src={imageUrl}
+          quality={95}
+          width={90}
+          height={90}
+          className="not-prose inline-block z-[5] h-24 w-24 rounded-xl object-cover saturate-0 contrast-125 border border-[#DADADA] dark:border-[#333] hover:h-32 hover:w-32 hover:saturate-100 hover:contrast-100 hover:rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
+          alt="a cute photo of Ignas"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="
+        />
+      </>
+    )}
+  </div>
+);
+
 const Header = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [avatar, setAvatar] = useState(null);
 
   useEffect(() => {
-    // Simulate loading delay
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 100);
-
-    return () => clearTimeout(timer);
+    const fetchData = async () => {
+      try {
+        const avatarUrl = await DiscordStatus.getAvatarUrl();
+        setAvatar(avatarUrl);
+      } catch (error) {
+        console.error("Error fetching avatar:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
   }, []);
+
+  const imageUrl = avatar || "/images/ignas_image.jpg";
 
   return (
     <div className="bg-transparent text-foreground">
       <div className="flex items-center space-x-4 mb-4">
-        {isLoading ? (
-          <Skeleton className="w-16 h-16 rounded-xl" />
-        ) : (
-          <ProfileImageLarge />
-        )}
+        <ProfileImage imageUrl={imageUrl} isLoading={isLoading} />
         <div>
           <div className="flex items-center space-x-1">
             {isLoading ? (
@@ -88,3 +123,4 @@ const Header = () => {
 };
 
 export default Header;
+
