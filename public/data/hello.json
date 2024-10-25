@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "id": "2b2acd31-eab0-4b6c-89cd-4b9dc8c65e15",
+    "id": "700c8a96-5433-4565-9938-648b673b3113",
     "slug": "hello",
     "title": "React Hooks Deep Dive Transforming Functional Components",
     "description": "Explore how React hooks have transformed the way we write functional components in modern React applications.",
@@ -11,7 +11,7 @@
     "readingTime": "4 min read",
     "uploaded": "2024-09-18T00:00:00.000Z",
     "tag": "tech",
-    "heroImage": "/posts/post3.jpg"
+    "heroImage": "https://res.cloudinary.com/dbbi1d6wo/image/upload/v1729817347/post3_ctmv8j.jpg"
   },
   "tableOfContents": [
     {

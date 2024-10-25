@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "id": "128eeaf9-7b0d-494a-98df-594bb6fce210",
+    "id": "1ee2d822-1069-42df-a81e-91431b55463b",
     "slug": "ai",
     "title": "TypeScript Best Practices Writing Cleaner, Safer Code",
     "description": "Learn key best practices for writing clean and type-safe TypeScript code.",
@@ -11,7 +11,7 @@
     "readingTime": "6 min read",
     "uploaded": "2024-11-20T00:00:00.000Z",
     "tag": "web-development",
-    "heroImage": "/posts/post1.jpg"
+    "heroImage": "https://res.cloudinary.com/dbbi1d6wo/image/upload/v1729817345/post1_k3q3d8.jpg"
   },
   "tableOfContents": [
     {

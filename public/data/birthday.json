@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "id": "7b3e49fb-f35f-4da8-89d6-4edbe5ac41e1",
+    "id": "6147283f-b2ef-46e0-98b9-b0744264d4d1",
     "slug": "birthday",
     "title": "Next.js 13 App Router A New Era of React Applications",
     "description": "A comprehensive guide to Next.js 13's App Router and how it reshapes routing in React apps.",
@@ -11,7 +11,7 @@
     "readingTime": "4 min read",
     "uploaded": "2024-09-18T00:00:00.000Z",
     "tag": "tech",
-    "heroImage": "/posts/post2.jpg"
+    "heroImage": "https://res.cloudinary.com/dbbi1d6wo/image/upload/v1729817350/post2_vpelv3.jpg"
   },
   "tableOfContents": [
     {

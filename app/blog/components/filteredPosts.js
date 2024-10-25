@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useMemo } from "react";
 import Image from 'next/image';
+import { CldImage } from 'next-cloudinary';
 import { Tags, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from 'next/link';
@@ -67,14 +68,15 @@ const PostCard = ({ post, index }) => {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "tween", ease: "easeOut", duration: 0.3 }}
             >
-              <Image
+              <CldImage
                 src={post.heroImage}
                 alt={post.title}
-                fill
+                width={400}
+                height={300}
+                crop="fill"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 loading="lazy"
-                style={{ objectFit: 'cover' }}
-                className="w-full h-full"
+                className="w-full h-full object-cover"
               />
             </motion.div>
           </div>

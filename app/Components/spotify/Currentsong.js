@@ -16,9 +16,6 @@ const SpotifyPlayer = () => {
   const SPOTIFY_CLIENT_SECRET = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
   const SPOTIFY_REFRESH_TOKEN = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN;
 
-  console.log("client id", SPOTIFY_CLIENT_ID);
-  console.log("client secret", SPOTIFY_CLIENT_SECRET);
-
   const getAccessToken = async () => {
     const basic = btoa(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`);
     const response = await fetch('https://accounts.spotify.com/api/token', {
@@ -171,7 +168,7 @@ const SpotifyPlayer = () => {
         onClick={() => handleClick(track)}
       >
         <div
-          className="absolute inset-0 bg-cover bg-center filter blur brightness-90 dark:blur-md dark:brightness-50"
+          className="absolute inset-0 bg-cover bg-center filter blur brightness-70 dark:blur-md dark:brightness-90"
           style={{ backgroundImage: `url(${track.album.images[0].url})` }}
         />
         <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-background/70' : 'bg-background/30'}`} />

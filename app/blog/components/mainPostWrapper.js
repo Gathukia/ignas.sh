@@ -1,50 +1,34 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { CornerUpLeft, ChevronDown, ChevronUp } from "lucide-react";
+import { CornerUpLeft } from "lucide-react";
 import Link from "next/link";
 
-const TableOfContents = ({ toc, activeId, isMobile = false, isOpen, toggleOpen }) => (
-  <nav
-    className={`${
-      isMobile ? "bg-transparent bg-blur-lg border border-border border-2 p-4 rounded-2xl shadow-lg" : "pl-4"
-    }`}
-  >
-    {isMobile && (
-      <button
-        onClick={toggleOpen}
-        className="flex items-center justify-between w-full text-lg font-semibold text-primary mb-2"
-      >
-        Table of Contents
-        {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-      </button>
-    )}
-    {(!isMobile || isOpen) && (
-      <div className={`${isMobile ? "mt-2" : ""} space-y-1`}>
-        {toc.map((item) => (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById(item.id).scrollIntoView({ behavior: 'smooth' });
-            }}
-            className={`block px-2 transition-colors duration-300 text-sm ${
-              activeId === item.id
-                ? "text-primary text-lg underline decoration-solid decoration-2"
-                : "text-muted-foreground hover:text-primary hover:underline"
-            }`}
-          >
-            {item.title}
-          </a>
-        ))}
-      </div>
-    )}
+const TableOfContents = ({ toc, activeId }) => (
+  <nav className="pl-4">
+    <div className="space-y-2 max-h-[70vh] overflow-y-auto">
+      {toc.map((item) => (
+        <a
+          key={item.id}
+          href={`#${item.id}`}
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById(item.id).scrollIntoView({ behavior: 'smooth' });
+          }}
+          className={`block py-1 px-2 rounded transition-all duration-200 text-sm ${
+            activeId === item.id
+              ? "bg-primary/10 text-primary font-medium"
+              : "text-muted-foreground hover:bg-primary/5 hover:text-foreground"
+          }`}
+        >
+          {item.title}
+        </a>
+      ))}
+    </div>
   </nav>
 );
 
 const MainPostWrapper = ({ children, toc }) => {
   const [activeId, setActiveId] = useState("");
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -84,19 +68,6 @@ const MainPostWrapper = ({ children, toc }) => {
 
         {/* Main content */}
         <main className="flex-1 overflow-hidden">
-          {/* Mobile TOC */}
-          <div className="lg:hidden sticky top-0 z-10 bg-transparent">
-            <div className="mx-auto px-2">
-              <TableOfContents
-                toc={toc}
-                activeId={activeId}
-                isMobile={true}
-                isOpen={isMobileMenuOpen}
-                toggleOpen={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              />
-            </div>
-          </div>
-
           {/* Content area */}
           <div className="max-w-2xl xl:max-w-2xl mx-auto px-2">
             <article className="">

@@ -1,9 +1,9 @@
-"use client";
+"use client"
 import React, { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { Sun, Moon, Clock, Twitter, Github, Instagram, Mail } from 'lucide-react';
-import {Discord} from '../Ui/Icons';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Discord } from '../Ui/Icons';
+import useSound from 'use-sound';
 
 const iconMap = {
   x: Twitter,
@@ -50,13 +50,25 @@ const Footer = () => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
+  const [play] = useSound("/sounds/lightswitch.mp3", {
+    volume: 0.05,
+    sprite: {
+      on: [0, 300],
+      off: [500, 300],
+    },
+  });
+
   useEffect(() => {
     setMounted(true);
   }, []);
 
   if (!mounted) return null;
 
-  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    play({ id: newTheme === 'dark' ? 'off' : 'on' });
+  };
 
   return (
     <footer className="mt-auto w-full bg-card border-t border-border py-4">
@@ -84,21 +96,11 @@ const Footer = () => {
             className="p-2 rounded-full hover:bg-accent hover:text-accent-foreground focus:outline-none transition-colors"
             title="Toggle theme"
           >
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={theme}
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: 20, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                {theme === 'dark' ? (
-                  <Sun className="w-5 h-5" />
-                ) : (
-                  <Moon className="w-5 h-5" />
-                )}
-              </motion.div>
-            </AnimatePresence>
+            {theme === 'dark' ? (
+              <Sun className="w-5 h-5" />
+            ) : (
+              <Moon className="w-5 h-5" />
+            )}
             <span className="sr-only">Toggle theme</span>
           </button>
         </div>

@@ -7,8 +7,9 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import CodeBlock from './ui/code_block';
 
-import '../../marker.css'
+import '../../marker.css';
 
 const cn = (...classes) => classes.filter(Boolean).join(' ');
 
@@ -18,9 +19,9 @@ const Heading = ({ level, children, className, ...props }) => {
   const slug = slugify(children);
   const HeadingTag = `h${level}`;
   const headingClasses = {
-    h1: "mt-12 mb-6 text-xl font-bold text-primary",
-    h2: "mt-10 mb-4 text-lg font-bold text-primary",
-    h3: "mt-8 mb-3 text-lg font-semibold text-primary",
+    h1: "mt-8 mb-6 text-lg font-bold text-primary",
+    h2: "mt-8 mb-4 text-base font-bold text-primary",
+    h3: "mt-8 mb-3 text-base font-semibold text-primary",
     h4: "mt-6 mb-2 text-base font-semi-bold text-primary",
   };
 
@@ -107,7 +108,6 @@ const Table = ({ data }) => (
   </div>
 );
 
-
 const MDX = async (props) => (
   <Suspense fallback={<div className="text-center text-lg font-medium text-gray-600 dark:text-gray-400">Loading...</div>}>
     <MDXRemote
@@ -119,7 +119,7 @@ const MDX = async (props) => (
         h4: (props) => <Heading level={4} {...props} />,
         a: CustomLink,
         p: ({ className, ...props }) => (
-          <p className={cn("my-4 font-space-mono text-sm leading-7 text-muted-foreground", className)} {...props} />
+          <p className={cn("my-4 text-sm leading-7 text-muted-foreground", className)} {...props} />
         ),
         ul: ({ className, ...props }) => (
           <ul className={cn("my-6 ml-6 list-disc text-base text-gray-700 dark:text-gray-300", className)} {...props} />
@@ -139,12 +139,8 @@ const MDX = async (props) => (
         Image: RoundedImage,
         Table,
         Callout,
-        code: ({ className, ...props }) => (
-          <code className={cn("px-1 py-0.5 rounded bg-card dark:bg-card text-xs font-mono overflow-hidden", className)} {...props} />
-        ),
-        pre: ({ className, ...props }) => (
-          <pre className={cn("p-4 my-6 rounded-3xl rounded-b-lg border border-border border-4 bg-card dark:bg-card overflow-hidden", className)} {...props} />
-        ),
+        code: CodeBlock,
+        pre: ({ children }) => children,
         ...(props.components || {}),
       }}
       options={{
@@ -157,16 +153,17 @@ const MDX = async (props) => (
             }],
             rehypeHighlight,
             [rehypePrettyCode, {
+              theme: 'github-dark',
               onVisitLine(node) {
                 if (node.children.length === 0) {
                   node.children = [{ type: 'text', value: ' ' }];
                 }
               },
               onVisitHighlightedLine(node) {
-                node.properties.className.push('bg-blue-100 dark:bg-blue-900 border-l-4 border-blue-500 pl-2');
+                node.properties.className.push('highlight');
               },
               onVisitHighlightedWord(node) {
-                node.properties.className = ['bg-blue-200 dark:bg-blue-800 rounded px-1 py-0.5'];
+                node.properties.className = ['word-highlight'];
               },
             }],
           ],

@@ -3,6 +3,7 @@ import { Verified } from '../Ui/Verified';
 import { X, Github, Linkedin, Instagram, Mail, Discord } from '../Ui/Icons';
 import { Skeleton } from "@/components/ui/skeleton"
 import Image from 'next/image';
+import { CldImage } from 'next-cloudinary';
 import DiscordStatus from './Status';
 
 const socialLinks = [
@@ -33,24 +34,26 @@ const ProfileImage = ({ imageUrl, isLoading }) => (
       <Skeleton className="w-[100px] h-[100px] rounded-xl" />
     ) : (
       <>
-        <Image
+        <CldImage
           src={imageUrl}
-          quality={50}
           width={100}
           height={100}
           className="absolute rounded-xl object-cover blur-lg opacity-50"
           alt="Blurred background of Ignas"
           priority={true}
+          format="webp"
+          quality={50}
         />
-        <Image
+        <CldImage
           src={imageUrl}
-          quality={95}
           width={90}
           height={90}
           className="not-prose inline-block z-[5] h-24 w-24 rounded-xl object-cover saturate-0 contrast-125 border border-[#DADADA] dark:border-[#333] hover:h-32 hover:w-32 hover:saturate-100 hover:contrast-100 hover:rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.4, 0, 0.2, 1)]"
           alt="a cute photo of Ignas"
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="
+          format="webp"
+          quality={95}
         />
       </>
     )}
@@ -75,7 +78,7 @@ const Header = () => {
     fetchData();
   }, []);
 
-  const imageUrl = avatar || "/images/ignas_image.jpg";
+  const imageUrl = avatar || "https://res.cloudinary.com/dbbi1d6wo/image/upload/v1729817821/ignas_image_u0j01m.jpg";
 
   return (
     <div className="bg-transparent text-foreground">

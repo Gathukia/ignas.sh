@@ -18,30 +18,10 @@ export const BlogHeader = ({
     : '';
 
   return (
-    <header className="relative bg-white dark:bg-transparent w-full mx-auto pt-5 px-4 sm:px-4 lg:px-4">
-      {/* Light Mode: Background Image Overlay */}
+    <header className="relative bg-transparent dark:bg-transparent w-full mx-auto pt-5 lg:px-2">
+      {/* Background Image Overlay (Dark Mode Only) */}
       <div
-        className="absolute inset-0 z-0 opacity-0 dark:opacity-0 fade mix-blend-soft-light"
-        style={{
-          backgroundImage: `linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0.6) 0%,
-            rgba(245, 245, 245, 0.8) 50%,
-            rgba(240, 240, 240, 0.95) 80%,
-            rgba(252, 251, 245, 0.99) 100%
-          ), url(${heroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          filter: 'blur(0px)',
-          backdropFilter: 'blur(05px)',
-          height: 'calc(100% + 60px)',
-        }}
-      />
-
-      {/* Background Image Overlay (Dark Mode) */}
-      <div
-        className="absolute inset-0 z-0 opacity-0 dark:opacity-20"
+        className="absolute inset-0 z-0 opacity-0 dark:opacity-20 transition-opacity duration-300"
         style={{
           backgroundImage: `linear-gradient(
             to bottom,
@@ -81,7 +61,7 @@ export const BlogHeader = ({
           </time>
 
           {/* Blog title */}
-          <h1 className="text-3xl md:text-3xl font-bold text-primary dark:text-primary leading-tight mb-2">
+          <h1 className="text-2xl md:text-2xl font-bold text-primary dark:text-primary leading-tight mb-2">
             {title}
           </h1>
 
