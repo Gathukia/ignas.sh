@@ -2,13 +2,11 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { BackgroundContainer } from './Ui/Background';
-import Navbar from './Components/Navbar';
 import Header from './Components/Header'
 import About from './Components/About';
 import Articles from './Components/Articles';
 import Projects from './Components/Projects';
 import ActivityComponent from './Components/ActivityComponent'
-import Footer from './Components/Footer';
 import Contact from './Components/Contact';
 import ProgressiveBlur from './Components/Blur'
 
@@ -16,8 +14,7 @@ export default function Home() {
   return (
     <BackgroundContainer contentType="written">
       <div className="min-h-screen bg-scrool bg-background dark:bg-transparent text-foreground">
-        <Navbar/>
-        <main className="max-w-2xl mx-auto px-4 pt-12">
+        <main className="max-w-2xl mx-auto px-4 pt-14">
           <article>
 
             {/* Introduction */}
@@ -52,10 +49,6 @@ export default function Home() {
 
           </article>
         </main>
-            {/* About Section */}
-            <ProgressiveBlur index={7} className="mb-4">
-              <Footer/>
-            </ProgressiveBlur>
       </div>
     </BackgroundContainer>
   );

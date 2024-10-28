@@ -8,7 +8,7 @@ export default async function Projects() {
     <BackgroundContainer contentType="written">
       <div className="flex flex-col min-h-screen bg-scroll bg-background dark:bg-transparent text-foreground">
         <Navbar />
-        <main className="max-w-3xl mx-auto py-12 px-6">
+        <main className="max-w-3xl mx-auto py-16 px-6">
           <h1 className="text-4xl font-extrabold mb-8 text-center">Projects & Tools</h1>
           <p className="mb-6 text-lg leading-relaxed text-center">
             here you will find a stash of my projects and tools i have worked on some for my own 
@@ -23,7 +23,6 @@ export default async function Projects() {
 
           {/* Placeholder for future project showcases */}
         </main>
-        <Footer />
       </div>
     </BackgroundContainer>
   );

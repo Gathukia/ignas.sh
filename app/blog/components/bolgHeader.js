@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeftIcon, ClockIcon, EyeIcon, HeartIcon } from 'lucide-react';
+import { ClockIcon, EyeIcon, HeartIcon } from 'lucide-react';
 import { LoadingDots } from './ui/loadingDots';
 import { format } from 'date-fns';
 
@@ -18,7 +18,7 @@ export const BlogHeader = ({
     : '';
 
   return (
-    <header className="relative bg-transparent dark:bg-transparent w-full mx-auto pt-5 lg:px-2">
+    <header className="relative bg-transparent dark:bg-transparent w-full mx-auto pt-10 lg:px-2">
       {/* Background Image Overlay (Dark Mode Only) */}
       <div
         className="absolute inset-0 z-0 opacity-0 dark:opacity-20 transition-opacity duration-300"
@@ -44,14 +44,6 @@ export const BlogHeader = ({
 
       {/* Content */}
       <div className="relative max-w-2xl mx-auto z-10">
-        <Link
-          href="/blog"
-          className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200 mb-4"
-        >
-          <ArrowLeftIcon className="w-4 h-4 mr-2" />
-          <span>Back to Blog Posts</span>
-        </Link>
-
         <div className="space-y-4 pl-6">
           <time
             dateTime={publishDate}

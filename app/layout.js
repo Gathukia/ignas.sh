@@ -3,6 +3,7 @@ import { ThemeProvider } from 'next-themes';
 import { Play, Inter, Space_Mono } from 'next/font/google';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
+import { BackgroundContainer } from './Ui/Background';
 
 const play = Play({
   subsets: ['latin'],
@@ -34,12 +35,16 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://cdn.xeiaso.net/static/css/iosevka/family.css" />
       </head>
       <body className={`${play.variable} ${inter.variable} ${spaceMono.variable} font-inter`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <div className="flex flex-col min-h-screen antialiased selection:bg-neutral-500/90 selection:text-white">
-            <main className="flex-grow">
-              {children}
-            </main>
-          </div>
+        <ThemeProvider attribute="class" enableSystem>
+          <BackgroundContainer contentType="media">
+            <div className="flex flex-col min-h-screen antialiased selection:bg-neutral-500/90 selection:text-white">
+              <Navbar />
+              <main className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </BackgroundContainer>
         </ThemeProvider>
       </body>
     </html>

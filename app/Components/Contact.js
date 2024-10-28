@@ -11,7 +11,7 @@ const EmphasizedText = ({ children }) => (
 );
 
 const ExitText = ({ text }) => (
-  <div className="relative flex flex-items justify-center h-8 overflow-hidden mt-4">
+  <div className="relative flex flex-items justify-center h-8 overflow-hidden mb-14 lg:mb-0 mt-4">
     <p 
       className="absolute text-sm font-bold text-muted-foreground dark:text-primary opacity-20 transform rotate-6 transition-all duration-300 hover:opacity-100 hover:scale-105"
       style={{ 

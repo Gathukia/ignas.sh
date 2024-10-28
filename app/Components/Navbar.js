@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -11,7 +11,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Terminal } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -19,106 +19,114 @@ const navItems = [
   { id: "project", title: "Projects", href: "/project" },
 ];
 
-// Navigation Links Component
-function NavLinks({ pathname }) {
-  return (
-    <div className="flex items-center space-x-6">
-      {navItems.map((item) => (
-        <Link
-          key={item.id}
-          href={item.href}
-          className="relative py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
-        >
-          {item.title}
-          {pathname.startsWith(item.href) && (
-            <motion.div
-              className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary"
-              layoutId="activeUnderline"
-              initial={false}
-              transition={{
-                type: "spring",
-                stiffness: 500,
-                damping: 30,
-              }}
-            />
-          )}
-        </Link>
-      ))}
-    </div>
-  );
-}
-
-// Breadcrumb Trail Component
-function BreadcrumbTrail({ segments }) {
-  return (
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/" className="font-medium hover:text-primary">
-            ignas.sh
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        {segments.map((segment, index) => (
-          <React.Fragment key={index}>
-            <BreadcrumbSeparator>
-              <ChevronRight className="h-4 w-4 text-muted-foreground" />
-            </BreadcrumbSeparator>
-            <BreadcrumbItem>
-              <BreadcrumbLink 
-                href={`/${segments.slice(0, index + 1).join("/")}`}
-                className="capitalize hover:text-primary"
-              >
-                {segment}
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </React.Fragment>
-        ))}
-      </BreadcrumbList>
-    </Breadcrumb>
-  );
-}
-
-function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
+// Animated Link Component
+const AnimatedLink = ({ href, children }) => {
+  const linkRef = useRef(null);
   const pathname = usePathname();
+  const [width, setWidth] = useState(0);
+  const active = pathname.startsWith(href);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    if (linkRef.current) {
+      setWidth(linkRef.current.offsetWidth);
+    }
+  }, [linkRef.current?.offsetWidth]);
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  return (
+    <Link
+      ref={linkRef}
+      href={href}
+      className={cn(
+        "relative px-4 py-2 text-sm tracking-wide transition-colors duration-300",
+        active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+      )}
+    >
+      <span className="relative z-10">{children}</span>
+      {active && (
+        <motion.div
+          className="absolute h-0.5 bottom-0 left-0 bg-primary"
+          style={{ width }}
+          layoutId="activeUnderline"
+          transition={{
+            type: "spring",
+            stiffness: 500,
+            damping: 30,
+          }}
+        />
+      )}
+    </Link>
+  );
+};
 
+// Navigation Links Component
+const NavLinks = () => (
+  <div className="flex items-center space-x-4">
+    {navItems.map((item) => (
+      <AnimatedLink key={item.id} href={item.href}>
+        {item.title}
+      </AnimatedLink>
+    ))}
+  </div>
+);
+
+const BreadcrumbTrail = ({ segments }) => (
+  <Breadcrumb>
+    <BreadcrumbList className="flex items-center space-x-1 text-sm">
+      <BreadcrumbItem>
+        <BreadcrumbLink 
+          href="/" 
+          className="flex items-center gap-2 font-mono font-medium text-foreground hover:text-foreground/80 transition-colors"
+        >
+          <Terminal className="h-5 w-5" />
+          <span>ignas.sh</span>
+        </BreadcrumbLink>
+      </BreadcrumbItem>
+      {segments.map((segment, index) => (
+        <React.Fragment key={index}>
+          <BreadcrumbSeparator>
+            <ChevronRight className="h-4 w-4 text-muted-foreground/60" />
+          </BreadcrumbSeparator>
+          <BreadcrumbItem>
+            <BreadcrumbLink 
+              href={`/${segments.slice(0, index + 1).join("/")}`}
+              className="font-mono text-muted-foreground hover:text-foreground transition-colors capitalize"
+            >
+              {segment}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </React.Fragment>
+      ))}
+    </BreadcrumbList>
+  </Breadcrumb>
+);
+
+const Navbar = () => {
+  const pathname = usePathname();
   const pathSegments = pathname.split("/").filter(Boolean);
 
   return (
-    <div className="w-full max-w-xl px-4 bg-background/95 border-b">
-      <nav
-        className={cn(
-          "relative mx-auto bg-card/95 backdrop-blur-xl backdrop-filter",
-          "transition-all duration-300 ease-in-out",
-          isScrolled && "shadow-sm shadow-primary/10"
-        )}
-      >
-        {/* Mobile Navigation */}
-        <div className="md:hidden p-4">
-          <BreadcrumbTrail segments={pathSegments} />
-        </div>
+    <>
+      <nav className="fixed top-0 left-0 right-0 z-50">
+        <div className="absolute inset-0 bg-transparent backdrop-blur-[8px]" />
+        <div className="relative mx-auto max-w-3xl px-4 py-px">
+          {/* Mobile Breadcrumbs */}
+          <div className="md:hidden">
+            <BreadcrumbTrail segments={pathSegments} />
+          </div>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center justify-between p-4">
-          <BreadcrumbTrail segments={pathSegments} />
-          <NavLinks pathname={pathname} />
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center justify-between">
+            <BreadcrumbTrail segments={pathSegments} />
+            <NavLinks />
+          </div>
         </div>
       </nav>
-    </div>
+      {/* Prevent content from going under navbar */}
+    </>
   );
-}
+};
 
 export default Navbar;
-
 
 
 

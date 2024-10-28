@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Map, { Marker } from 'react-map-gl';
-import Image from 'next/image';
+import { CldImage } from 'next-cloudinary';
 import { useTheme } from 'next-themes';
 import { Cloud, Droplets, Sun, Wind } from 'lucide-react';
 
@@ -171,13 +171,14 @@ const IntegratedComponent = () => {
             <div className="absolute inset-0 rounded-full bg-green-400 opacity-30 animate-ping" style={{ animationDelay: '0.5s' }}></div>
             <div className="absolute inset-0 rounded-full bg-blue-500 opacity-30 animate-pulse"></div>
             <div className="relative h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-lg">
-              <Image
-                src="/images/ignas_image.jpg"
-                quality={95}
-                layout="fill"
-                objectFit="cover"
+              <CldImage
+                src="ignas_image_u0j01m"
+                width={32}
+                height={32}
                 alt="Profile"
                 className="rounded-full dark:saturate-0 contrast-125"
+                format="webp"
+                quality={95}
               />
             </div>
           </div>
