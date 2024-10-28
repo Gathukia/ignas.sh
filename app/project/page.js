@@ -7,7 +7,6 @@ export default async function Projects() {
   return (
     <BackgroundContainer contentType="written">
       <div className="flex flex-col min-h-screen bg-scroll bg-background dark:bg-transparent text-foreground">
-        <Navbar />
         <main className="max-w-3xl mx-auto py-16 px-6">
           <h1 className="text-4xl font-extrabold mb-8 text-center">Projects & Tools</h1>
           <p className="mb-6 text-lg leading-relaxed text-center">
