@@ -43,7 +43,7 @@ const PostCard = ({ post, index }) => {
   return (
     <Link href={`/blog/${post.slug}`}>
       <motion.div 
-        className={`w-full bg-card rounded-2xl border border-border border-4 overflow-hidden shadow-lg mb-4 fade-in-translate ${staggerClass} cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-102`}
+        className={`w-full bg-card rounded-2xl border border-border border-4 overflow-hidden shadow-lg mb-4 fade-in-translate ${staggerClass} cursor-pointer transition-all hover:shadow-xl hover:scale-102`}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >

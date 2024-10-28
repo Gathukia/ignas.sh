@@ -19,8 +19,8 @@ const Heading = ({ level, children, className, ...props }) => {
   const slug = slugify(children);
   const HeadingTag = `h${level}`;
   const headingClasses = {
-    h1: "mt-8 mb-6 text-lg font-bold text-primary",
-    h2: "mt-8 mb-4 text-base font-bold text-primary",
+    h1: "mt-10 mb-6 text-lg font-bold text-primary",
+    h2: "mt-10 mb-4 text-base font-bold text-primary",
     h3: "mt-8 mb-3 text-base font-semibold text-primary",
     h4: "mt-6 mb-2 text-base font-semi-bold text-primary",
   };

@@ -17,7 +17,7 @@ export default function Home() {
     <BackgroundContainer contentType="written">
       <div className="min-h-screen bg-scrool bg-background dark:bg-transparent text-foreground">
         <Navbar/>
-        <main className="max-w-xl mx-auto px-4 pt-12">
+        <main className="max-w-2xl mx-auto px-4 pt-12">
           <article>
 
             {/* Introduction */}
