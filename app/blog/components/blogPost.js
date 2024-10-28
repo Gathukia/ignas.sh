@@ -6,7 +6,7 @@ import Footer from '@/app/Components/Footer';
 
 const BlogFooter = ({ prevPost, nextPost }) => {
   return (
-    <footer className="w-full max-w-2xl mx-auto mt-8 px-4 sm:px-6 lg:px-8 border-t border-gray-200 dark:border-gray-700 pt-6">
+    <footer className="w-full max-w-2xl mx-auto mt-8 px-4 sm:px-6 lg:px-8 border-t border-border pt-4 pb-16">
       <nav className="flex justify-between items-stretch">
         {/* Previous Post Link */}
         <div className="w-1/2 pr-4">

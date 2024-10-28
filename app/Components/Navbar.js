@@ -37,7 +37,7 @@ const AnimatedLink = ({ href, children }) => {
       ref={linkRef}
       href={href}
       className={cn(
-        "relative px-4 py-2 text-sm tracking-wide transition-colors duration-300",
+        "relative px-4 py-1 text-sm tracking-wide transition-colors duration-300",
         active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
       )}
     >

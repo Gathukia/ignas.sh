@@ -1,15 +1,15 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { Sun, Moon, Clock, Twitter, Github, Instagram, Mail, ChevronUp, BookOpen, Code } from 'lucide-react';
-import { Discord } from '../Ui/Icons';
+import { Sun, Moon, Clock, BookOpen, Code, ChevronUp } from 'lucide-react';
+import { X, Github, Instagram, Mail, Discord } from '../Ui/Icons';
 import useSound from 'use-sound';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
 const iconMap = {
-  x: Twitter,
+  'x(twitter)': X,
   github: Github,
   discord: Discord,
   instagram: Instagram,
@@ -23,10 +23,13 @@ const SocialLink = ({ name, url }) => {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
+      className="group flex items-center text-muted-foreground hover:text-foreground transition-colors"
     >
       <span className="capitalize">{name}</span>
-      <Icon className="w-0 h-5 group-hover:w-5 transition-all duration-200 ease-in-out overflow-hidden" />
+      <div className="hidden sm:block w-0 group-hover:w-5 transition-all duration-200">
+        <Icon className="w-5 h-5 ml-2" />
+      </div>
+      <Icon className="sm:hidden w-5 h-5 ml-2" /> {/* Show icon by default on mobile */}
     </a>
   );
 };
@@ -90,7 +93,7 @@ const Footer = () => {
       <footer className="hidden sm:block mt-auto w-full bg-card border-t border-border py-4">
         <div className="max-w-3xl mx-auto px-4 flex justify-between items-center">
           <div className="flex space-x-4">
-            <SocialLink name="x" url="https://x.com/ignas_edwin" />
+            <SocialLink name="x(twitter)" url="https://x.com/ignas_edwin" />
             <SocialLink name="github" url="https://github.com/Gathukia" />
             <SocialLink name="discord" url="https://discord.com/users/963425032426635345" />
             <SocialLink name="instagram" url="https://instagram.com/_ignas254" />
@@ -101,10 +104,12 @@ const Footer = () => {
               href="https://github.com/Gathukia/ignas.sh"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center space-x-2"
+              className="group text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center"
             >
-              <Github className="w-4 h-4" />
               <span>Source</span>
+              <div className="transition-all duration-200">
+                <Github className="w-4 h-4 ml-2" />
+              </div>
             </a>
             <ClockDisplay />
             <button
@@ -178,7 +183,7 @@ const Footer = () => {
               damping: 30,
               opacity: { duration: 0.2 }
             }}
-            className="sm:hidden fixed bottom-14 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border py-6 px-6 rounded-t-2xl shadow-lg z-20"
+            className="sm:hidden fixed bottom-14 left-0 right-0 bg-card/95 backdrop-blur-sm border-t border-border py-6 px-6 rounded-t-2xl shadow-lg z-20"
           >
             <motion.div 
               className="grid grid-cols-2 gap-6"
@@ -194,12 +199,14 @@ const Footer = () => {
                 }
               }}
             >
-              {["x", "github", "discord", "instagram", "mail"].map((name) => (
+              {["x(twitter)", "github", "discord", "instagram", "mail"].map((name) => (
                 <motion.div key={name} variants={{
                   hidden: { y: 20, opacity: 0 },
                   visible: { y: 0, opacity: 1 }
                 }}>
-                  <SocialLink name={name} url={`https://${name === 'x' ? 'x.com/ignas_edwin' : name === 'github' ? 'github.com/Gathukia' : name === 'discord' ? 'discord.com/users/963425032426635345' : name === 'instagram' ? 'instagram.com/_ignas254' : 'mailto:edwinngugi38@gmail.com'}`} />
+                  <div className="flex items-center space-x-2">
+                    <SocialLink name={name} url={`https://${name === 'x(twitter)' ? 'x.com/ignas_edwin' : name === 'github' ? 'github.com/Gathukia' : name === 'discord' ? 'discord.com/users/963425032426635345' : name === 'instagram' ? 'instagram.com/_ignas254' : 'mailto:edwinngugi38@gmail.com'}`} />
+                  </div>
                 </motion.div>
               ))}
               <motion.a
@@ -224,4 +231,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

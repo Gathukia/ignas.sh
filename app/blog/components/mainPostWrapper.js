@@ -9,7 +9,7 @@ const MainPostWrapper = ({ children }) => {
         {/* Main content */}
         <main className="flex-1 overflow-hidden">
           {/* Content area */}
-          <div className="max-w-2xl xl:max-w-2xl mx-auto px-2">
+          <div className="max-w-2xl xl:max-w-2xl mx-auto px-4">
             <article className="">
               {children}
             </article>
