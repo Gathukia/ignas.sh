@@ -6,8 +6,10 @@ import { useTheme } from 'next-themes';
 import { Cloud, Droplets, Sun, Wind } from 'lucide-react';
 
 const IntegratedComponent = () => {
-  const MIN_ZOOM = 8;
-  const MAX_ZOOM = 13;
+  const MIN_ZOOM = 10;
+  const MAX_ZOOM = 14;
+  const MIN_MARKER_SCALE = 0.7; // Minimum marker scale at lowest zoom
+  const MAX_MARKER_SCALE = 2.5; // Maximum marker scale at highest zoom
 
   const [viewState, setViewState] = useState({
     longitude: 36.8219, // Coordinates for Nairobi
@@ -26,7 +28,7 @@ const IntegratedComponent = () => {
   });
   const [time, setTime] = useState(null);
   const [isMounted, setIsMounted] = useState(false);
-  const [markerScale, setMarkerScale] = useState(1);
+  const [markerScale, setMarkerScale] = useState(MIN_MARKER_SCALE);
   const mapRef = useRef(null);
   const animationRef = useRef(null);
 
@@ -74,11 +76,19 @@ const IntegratedComponent = () => {
     return 1 - Math.pow(1 - t, 3);
   };
 
+  // Calculate marker scale based on current zoom level
+  const calculateMarkerScale = useCallback((zoom) => {
+    const zoomRange = MAX_ZOOM - MIN_ZOOM;
+    const scaleRange = MAX_MARKER_SCALE - MIN_MARKER_SCALE;
+    const zoomProgress = Math.max(0, Math.min(1, (zoom - MIN_ZOOM) / zoomRange));
+    return MIN_MARKER_SCALE + (scaleRange * zoomProgress);
+  }, []);
+
   const smoothZoom = useCallback((targetZoom, duration = 1000) => {
     const startZoom = viewState.zoom;
     const startTime = Date.now();
     const startMarkerScale = markerScale;
-    const targetMarkerScale = 1 + (targetZoom - 12) * 0.3; // Adjust marker size based on zoom level
+    const targetMarkerScale = calculateMarkerScale(targetZoom);
 
     const animate = () => {
       const currentTime = Date.now();
@@ -102,7 +112,7 @@ const IntegratedComponent = () => {
 
     if (animationRef.current) cancelAnimationFrame(animationRef.current);
     animationRef.current = requestAnimationFrame(animate);
-  }, [viewState.zoom, markerScale]);
+  }, [viewState.zoom, markerScale, calculateMarkerScale]);
 
   const handleZoom = useCallback(
     (direction) => {
@@ -151,7 +161,10 @@ const IntegratedComponent = () => {
       <Map
         ref={mapRef}
         {...viewState}
-        onMove={(evt) => setViewState(evt.viewState)}
+        onMove={(evt) => {
+          setViewState(evt.viewState);
+          setMarkerScale(calculateMarkerScale(evt.viewState.zoom));
+        }}
         mapboxAccessToken={mapboxAccessToken}
         style={{ width: '100%', height: '100%' }}
         mapStyle={mapStyle}
@@ -253,3 +266,7 @@ const IntegratedComponent = () => {
 };
 
 export default IntegratedComponent;
+
+
+
+
